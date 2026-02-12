@@ -5596,6 +5596,28 @@
 				}
 			],
 			"id": "de6c94a8-7f01-46d0-b2a7-ed61fe31606f"
+		},
+		{
+			"name": "booking_http",
+			"item": [
+				{
+					"name": "get_object_params",
+					"id": "86ae552f-6312-425e-be8d-7a1e518ad70d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://object.test2.realt.by/api/rest/v1/book/2585728"
+					},
+					"response": []
+				}
+			],
+			"id": "9d244ce0-0549-48ae-abc3-3f0bf1c21f5e"
 		}
 	],
 	"event": [
