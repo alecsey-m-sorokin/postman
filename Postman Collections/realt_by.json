@@ -5612,7 +5612,7 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "http://object.test2.realt.by/api/rest/v1/book/2585728"
+						"url": "http://object.test.realt.by/api/rest/v1/book/2585917"
 					},
 					"response": []
 				}
