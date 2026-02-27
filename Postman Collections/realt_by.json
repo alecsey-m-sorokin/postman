@@ -5558,7 +5558,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"notificationUuid\": \"12ac9a80-fd09-11f0-b394-51fbe6534a0d\",\r\n    \"templateName\": \"booking-byn-balance-weekly-remind\",\r\n    \"userUuid\": \"12ac9a80-fd09-11f0-a394-57fbe6514a0d\",\r\n    \"globalParams\": {\r\n\r\n    }\r\n}\r\n",
+							"raw": "{\r\n    \"notificationUuid\": \"91ac3a80-fd81-51f1-b124-11fbe6523a0d\",\r\n    \"templateName\": \"booking-byn-balance-weekly-remind\",\r\n    \"userUuid\": \"3a822830-1373-11ef-a60a-a3f8aa1bb582\",\r\n    \"globalParams\": {\r\n\r\n    }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -5583,7 +5583,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"notificationUuid\": \"12ac9a80-fd09-11f0-b394-51fbe6534a0d\",\r\n    \"templateName\": \"booking-byn-balance-weekly-remind\",\r\n    \"userUuid\": \"12ac9a80-fd09-11f0-a394-57fbe6514a0d\",\r\n    \"globalParams\": {\r\n\r\n    }\r\n}\r\n",
+							"raw": "{\r\n    \"notificationUuid\": \"91ac3a80-fd81-51f1-b324-11fbe6523a0d\",\r\n    \"templateName\": \"booking-byn-balance-weekly-remind\",\r\n    \"userUuid\": \"3a822830-1373-11ef-a60a-a3f8aa1bb582\",\r\n    \"globalParams\": {\r\n\r\n    }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
