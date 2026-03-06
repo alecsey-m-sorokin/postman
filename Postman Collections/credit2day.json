@@ -1642,14 +1642,42 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"rollbackToDateTime\": \"2026-02-03T11:00:00\",\n//   \"rollbackToDateTime\": \"2025-12-29T11:00:00\",\n  \"rollbackOptions\": {\n    \"repayments\": true,\n    \"withdrawAddProducts\": true,\n    \"creditHolidays\": true,\n    \"creditHolidaysEnds\": true,\n    \"prolongations\": true\n  }\n}",
+									"raw": "{\n  \"cashflowDateTime\": \"2026-02-03T11:00:00\",\n  \"issueAmount\": 1,\n  \"additionalProducts\": [\n    {\n        \"amount\": 1\n    }\n  ]\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "{{charges_url}}/agreements/{{agreement_id}}/rollback/analyze2"
+								"url": "{{charges_url}}/agreements/{{agreement_id}}/credit_line/issue/analyze"
+							},
+							"response": []
+						},
+						{
+							"name": "agreement Appy issue tranche for credit line",
+							"id": "24d9b9c1-1c10-4b96-abe9-6168a9f4acea",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{app_rep_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cashflowId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"cashflowDateTime\": \"2026-03-06T13:03:10.503Z\",\n  \"external\": {\n    \"provider\": \"string\",\n    \"gateTransactionNum\": \"string\",\n    \"providerTransactionNum\": \"string\",\n    \"extData\": \"string\"\n  },\n  \"additionalProducts\": [\n    {\n      \"additionalProductId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n      \"amount\": 1,\n      \"principalId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n      \"providerId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n      \"taxType\": \"string\",\n      \"taxRate\": 0,\n      \"taxAmount\": 0,\n      \"amountWithoutTax\": 0,\n      \"additionalData\": \"string\",\n      \"principalData\": \"string\",\n      \"providerData\": \"string\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{charges_url}}/agreements/{{agreement_id}}/credit_line/issue/apply"
 							},
 							"response": []
 						}
