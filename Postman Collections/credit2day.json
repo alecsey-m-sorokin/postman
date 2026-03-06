@@ -1623,8 +1623,37 @@
 					"id": "bc18b38b-d168-40f7-93b0-c30f4390c8ff"
 				},
 				{
-					"name": "New Folder",
-					"item": [],
+					"name": "Credit Line",
+					"item": [
+						{
+							"name": "agreement Analyze issue tranche for credit line",
+							"id": "cec59123-063f-488a-9025-f3a2ffa4d4a6",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{app_rep_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"rollbackToDateTime\": \"2026-02-03T11:00:00\",\n//   \"rollbackToDateTime\": \"2025-12-29T11:00:00\",\n  \"rollbackOptions\": {\n    \"repayments\": true,\n    \"withdrawAddProducts\": true,\n    \"creditHolidays\": true,\n    \"creditHolidaysEnds\": true,\n    \"prolongations\": true\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{charges_url}}/agreements/{{agreement_id}}/rollback/analyze2"
+							},
+							"response": []
+						}
+					],
 					"id": "6c6716be-6adc-472b-b2c9-7396c80c6c61"
 				}
 			],
