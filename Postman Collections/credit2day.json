@@ -614,7 +614,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{charges_url}}/Agreements/{{agreement_id}}?include=docs,product,product.interests,offers,offers.cashflow,offers.product,offers.info,offers.docs,offers.addProducts,primary.cashflow,primary.product,primary.info,primary.docs,primary.addProducts",
+									"raw": "{{charges_url}}/Agreements/{{agreement_id}}?include=primary.addProducts,offers.addProducts,withdrawAddProducts,additionalProducts,issueTranches",
 									"host": [
 										"{{charges_url}}"
 									],
@@ -676,12 +676,12 @@
 										},
 										{
 											"key": "include",
-											"value": "docs,product,product.interests,offers,offers.cashflow,offers.product,offers.info,offers.docs,offers.addProducts,primary.cashflow,primary.product,primary.info,primary.docs,primary.addProducts"
+											"value": "docs,product,product.interests,offers,offers.cashflow,offers.product,offers.info,offers.docs,offers.addProducts,primary.cashflow,primary.product,primary.info,primary.docs,primary.addProducts",
+											"disabled": true
 										},
 										{
 											"key": "include",
-											"value": "primary.addProducts,offers.addProducts,withdrawAddProducts",
-											"disabled": true
+											"value": "primary.addProducts,offers.addProducts,withdrawAddProducts,additionalProducts,issueTranches"
 										}
 									]
 								}
