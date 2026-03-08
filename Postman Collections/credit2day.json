@@ -1682,7 +1682,7 @@
 							"response": []
 						},
 						{
-							"name": "agreement Register new issue tranche for credit line is draft state",
+							"name": "agreement Initialize new issue tranche for credit line is draft state",
 							"id": "a54a71ab-7db6-4bda-88db-d12f8e810f85",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -1733,7 +1733,35 @@
 										}
 									}
 								},
-								"url": "{{charges_url}}/agreements/{{agreement_id}}/credit_line/issue/initialize"
+								"url": "{{charges_url}}/agreements/{{agreement_id}}/credit_line/issue/reject"
+							},
+							"response": []
+						},
+						{
+							"name": "agreement Force_Close for credit line",
+							"id": "659e5042-2da5-4ef4-9583-477d42c6bb5f",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{app_rep_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cashflowId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"reason\": \"string\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{charges_url}}/agreements/{{agreement_id}}/credit_line/issue/reject"
 							},
 							"response": []
 						},
