@@ -5633,6 +5633,60 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "moderate booking object",
+					"id": "c49137ee-d5a1-46ac-9db9-4b125cc8d6ce",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							},
+							{
+								"key": "X-User-Uuid",
+								"value": "{{x_user_uuid}}",
+								"disabled": false
+							},
+							{
+								"key": "X-User-Admin-Uuid",
+								"value": "{{x_user_admin_uuid}}",
+								"disabled": false
+							},
+							{
+								"key": "X-User-Roles",
+								"value": "{{x_user_roles}}",
+								"disabled": false
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/rpc/admin/booking-object/:objectId/moderate",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rpc",
+								"admin",
+								"booking-object",
+								":objectId",
+								"moderate"
+							],
+							"variable": [
+								{
+									"key": "objectId",
+									"value": "2574725"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \"{{host}}/api/rpc/admin/booking-object/:objectId/moderate\" -H \"Content-Type: application/json\" -H \"X-User-Uuid: {{x_user_uuid}}\" -H \"X-User-Admin-Uuid: {{x_user_admin_uuid}}\" -H \"X-User-Roles: {{x_user_roles}}\""
+					},
+					"response": []
 				}
 			],
 			"id": "9d244ce0-0549-48ae-abc3-3f0bf1c21f5e"
