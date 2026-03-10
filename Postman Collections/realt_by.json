@@ -5612,7 +5612,25 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "http://object.test.realt.by/api/rest/v1/book/2585917"
+						"url": {
+							"raw": "{{stage}}/api/rest/v1/book/:bookId",
+							"host": [
+								"{{stage}}"
+							],
+							"path": [
+								"api",
+								"rest",
+								"v1",
+								"book",
+								":bookId"
+							],
+							"variable": [
+								{
+									"key": "bookId",
+									"value": "2585783"
+								}
+							]
+						}
 					},
 					"response": []
 				}
