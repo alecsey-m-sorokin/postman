@@ -5754,13 +5754,13 @@
 					"response": []
 				},
 				{
-					"name": "moderate booking object Copy",
+					"name": "place booking object",
 					"id": "06341949-cb19-4f71-898c-bcf254f54b2f",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -5784,23 +5784,22 @@
 							}
 						],
 						"url": {
-							"raw": "{{stage}}/api/rpc/admin/booking-object/:objectId/moderate",
+							"raw": "{{stage}}/api/rest/v1/booking-object/place/:object_uuid",
 							"host": [
 								"{{stage}}"
 							],
 							"path": [
 								"api",
-								"rpc",
-								"admin",
+								"rest",
+								"v1",
 								"booking-object",
-								":objectId",
-								"moderate"
+								"place",
+								":object_uuid"
 							],
 							"variable": [
 								{
-									"id": "064a9511-d1cc-45e0-85a7-e29c5c12d016",
-									"key": "objectId",
-									"value": "2585783"
+									"key": "object_uuid",
+									"value": "67aa2890-1c67-11f1-aacd-b326015dd957"
 								}
 							]
 						},
