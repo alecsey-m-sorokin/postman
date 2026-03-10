@@ -5730,6 +5730,18 @@
 		{
 			"key": "stage",
 			"value": ""
+		},
+		{
+			"key": "x_user_uuid",
+			"value": ""
+		},
+		{
+			"key": "x_user_admin_uuid",
+			"value": ""
+		},
+		{
+			"key": "x_user_roles",
+			"value": ""
 		}
 	]
 }
