@@ -5665,7 +5665,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{stage}}/api/rpc/admin/booking-object/:objectId/moderate",
+							"raw": "{{stage}}/api/rpc/admin/booking-object/:objectId/verification",
 							"host": [
 								"{{stage}}"
 							],
@@ -5675,7 +5675,7 @@
 								"admin",
 								"booking-object",
 								":objectId",
-								"moderate"
+								"verification"
 							],
 							"variable": [
 								{
