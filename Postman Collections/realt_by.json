@@ -5635,7 +5635,7 @@
 					"response": []
 				},
 				{
-					"name": "moderate booking object",
+					"name": "verification booking object",
 					"id": "c49137ee-d5a1-46ac-9db9-4b125cc8d6ce",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -5679,6 +5679,61 @@
 							],
 							"variable": [
 								{
+									"key": "objectId",
+									"value": "2585783"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \"{{host}}/api/rpc/admin/booking-object/:objectId/moderate\" -H \"Content-Type: application/json\" -H \"X-User-Uuid: {{x_user_uuid}}\" -H \"X-User-Admin-Uuid: {{x_user_admin_uuid}}\" -H \"X-User-Roles: {{x_user_roles}}\""
+					},
+					"response": []
+				},
+				{
+					"name": "moderate booking object",
+					"id": "aa2667e9-274f-425e-8eb3-9f7ecb04f012",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							},
+							{
+								"key": "X-User-Uuid",
+								"value": "{{x_user_uuid}}",
+								"disabled": false
+							},
+							{
+								"key": "X-User-Admin-Uuid",
+								"value": "{{x_user_admin_uuid}}",
+								"disabled": false
+							},
+							{
+								"key": "X-User-Roles",
+								"value": "{{x_user_roles}}",
+								"disabled": false
+							}
+						],
+						"url": {
+							"raw": "{{stage}}/api/rpc/admin/booking-object/:objectId/moderate",
+							"host": [
+								"{{stage}}"
+							],
+							"path": [
+								"api",
+								"rpc",
+								"admin",
+								"booking-object",
+								":objectId",
+								"moderate"
+							],
+							"variable": [
+								{
+									"id": "064a9511-d1cc-45e0-85a7-e29c5c12d016",
 									"key": "objectId",
 									"value": "2585783"
 								}
