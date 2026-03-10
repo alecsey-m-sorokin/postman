@@ -5629,8 +5629,9 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "6d4cb50f-3cc2-4e73-a50f-374c230c5e2a",
+				"id": "fa5db732-a29e-45c7-b0ab-0f78aeda1975",
 				"type": "text/javascript",
+				"requests": {},
 				"exec": [
 					""
 				]
@@ -5639,12 +5640,24 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "4bfe208e-cf51-4d1a-92c3-c06aa5bbb4f4",
+				"id": "6cfe07b3-d92b-4de9-9f9a-74e4bd193a96",
 				"type": "text/javascript",
+				"requests": {},
 				"exec": [
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "stage",
+			"value": "",
+			"disabled": true
+		},
+		{
+			"key": "stage",
+			"value": ""
 		}
 	]
 }
