@@ -676,7 +676,7 @@
 										},
 										{
 											"key": "include",
-											"value": "docs,product,product.interests,offers,offers.cashflow,offers.product,offers.info,offers.docs,offers.addProducts,primary.cashflow,primary.product,primary.info,primary.docs,primary.addProducts",
+											"value": "docs,product,product.interests,offers,offers.cashflow,offers.product,offers.info,offers.docs,offers.addProducts,primary.cashflow,primary.product,primary.info,primary.docs,primary.addProducts,withdrawAddProducts,additionalProducts,issueTranches",
 											"disabled": true
 										},
 										{
