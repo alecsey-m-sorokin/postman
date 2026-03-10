@@ -5665,9 +5665,9 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/rpc/admin/booking-object/:objectId/moderate",
+							"raw": "{{stage}}/api/rpc/admin/booking-object/:objectId/moderate",
 							"host": [
-								"{{host}}"
+								"{{stage}}"
 							],
 							"path": [
 								"api",
@@ -5680,7 +5680,7 @@
 							"variable": [
 								{
 									"key": "objectId",
-									"value": "2574725"
+									"value": "2585783"
 								}
 							]
 						},
