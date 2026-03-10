@@ -5613,7 +5613,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{stage}}/api/rest/v1/book/:bookId",
+							"raw": "{{stage}}/api/rest/v1/book/:code",
 							"host": [
 								"{{stage}}"
 							],
@@ -5622,12 +5622,13 @@
 								"rest",
 								"v1",
 								"book",
-								":bookId"
+								":code"
 							],
 							"variable": [
 								{
-									"key": "bookId",
-									"value": "2585783"
+									"key": "code",
+									"value": "2585784",
+									"description": "dev2"
 								}
 							]
 						}
