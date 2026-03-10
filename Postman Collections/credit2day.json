@@ -2388,7 +2388,7 @@
 											"\r",
 											"// pm.environment.set(\"issue_date\", moment().format(\"YYYY-MM-DD\"));\r",
 											"// pm.environment.set(\"issue_date\", moment().set({'hour':0, 'minute': 0, 'second': 0}).format(\"YYYY-MM-DD HH:mm:ss\"))\r",
-											"pm.environment.set(\"issue_date\", moment().startOf('day'))\r",
+											"pm.environment.set(\"issue_date\", moment().utc().startOf('day'))\r",
 											"\r",
 											"console.log(\"current_timestamp = \", pm.environment.get(\"current_timestamp\"))\r",
 											"console.log(\"agr_valid_from = \", pm.environment.get(\"agr_valid_from\"))\r",
