@@ -5665,6 +5665,15 @@
 								"disabled": false
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{stage}}/api/rpc/admin/booking-object/:objectId/verification",
 							"host": [
