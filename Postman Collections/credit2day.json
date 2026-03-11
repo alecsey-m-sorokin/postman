@@ -2397,7 +2397,7 @@
 											"// pm.environment.set(\"accepted_date_time_utc\", moment().startOf('day').utc().toISOString())\r",
 											"\r",
 											"\r",
-											"pm.environment.set(\"issue_date\", moment.utc().startOf('day').set({'hour': 6, 'minute': 0, 'second': 0}).toISOString())\r",
+											"pm.environment.set(\"issue_date\", moment.utc().startOf('day').set({'hour': 6, 'minute': 0, 'second': 0}).toISOString())  // issue_date = 2026-03-11T06:00:00.000Z\r",
 											"\r",
 											"\r",
 											"\r",
