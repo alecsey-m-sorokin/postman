@@ -2374,7 +2374,6 @@
 										"exec": [
 											"var moment = require('moment')\r",
 											"\r",
-											"// pm.environment.set(\"current_timestamp\", moment().utc().toISOString())\r",
 											"pm.environment.set(\"current_timestamp\", moment().format(\"YYYY-MM-DD\"))\r",
 											"// pm.environment.set(\"current_timestamp-1\", moment().subtract(1, 'day').format(\"YYYY-MM-DD\"))\r",
 											"\r",
