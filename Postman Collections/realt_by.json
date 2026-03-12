@@ -5805,6 +5805,18 @@
 						"description": "Generated from cURL: curl -X POST \"{{host}}/api/rpc/admin/booking-object/:objectId/moderate\" -H \"Content-Type: application/json\" -H \"X-User-Uuid: {{x_user_uuid}}\" -H \"X-User-Admin-Uuid: {{x_user_admin_uuid}}\" -H \"X-User-Roles: {{x_user_roles}}\""
 					},
 					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "b42c63d7-2689-4801-9695-b549461c9cc0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			],
 			"id": "9d244ce0-0549-48ae-abc3-3f0bf1c21f5e"
