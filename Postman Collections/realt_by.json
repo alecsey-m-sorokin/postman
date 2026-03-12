@@ -5985,8 +5985,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  authLoginWeb(\r\n    login: \"dev_user_01_lord@rover.info\",\r\n  \tpassword: \"Oracle01\")\r\n}",
-								"variables": ""
+								"query": "mutation ($login: String!, $pass: String!) {\r\n    authLoginWeb(\r\n    login: $login,\r\n  \tpassword: $pass\r\n    )\r\n}\r\n",
+								"variables": "{\r\n  \"login\": \"dev_user_01_lord@rover.info\",\r\n  \"pass\": \"Oracle01\"\r\n}\r\n"
 							}
 						},
 						"url": "https://dev2.realt.by/bff/graphql"
