@@ -5947,6 +5947,51 @@
 						"url": "https://dev2.realt.by/bff/graphql"
 					},
 					"response": []
+				},
+				{
+					"name": "authLoginWeb",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0889601c-3180-45a1-ad5a-766ae4e74531",
+								"exec": [
+									"const authToken = pm.cookies.get(\"dev_authToken\");\r",
+									"\r",
+									"if (authToken) {\r",
+									"    pm.environment.set(\"authToken\", authToken);\r",
+									"    console.log(\"dev_authToken успешно сохранён в переменную: \" + authToken);\r",
+									"} else {\r",
+									"    console.log(\"Кука dev_authToken не найдена в ответе\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "ab9ef41a-12de-4809-9a22-988914300258",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  authLoginWeb(\r\n    login: \"dev_user_01_lord@rover.info\",\r\n  \tpassword: \"Oracle01\")\r\n}",
+								"variables": ""
+							}
+						},
+						"url": "https://dev2.realt.by/bff/graphql"
+					},
+					"response": []
 				}
 			],
 			"id": "9d244ce0-0549-48ae-abc3-3f0bf1c21f5e"
