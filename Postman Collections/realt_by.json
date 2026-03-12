@@ -6006,7 +6006,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "241e4459-3c42-40c1-8cbc-7c4d880ac612",
+				"id": "ad16b998-f603-4d6b-b49a-1daf5acf8e3c",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
@@ -6017,7 +6017,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "6d078d58-0201-4125-b802-502df09fe219",
+				"id": "f0ad6e4b-1221-4c69-bb1a-691343bb76e1",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
@@ -6046,6 +6046,10 @@
 		},
 		{
 			"key": "x_user_roles",
+			"value": ""
+		},
+		{
+			"key": "dev_user_01_lord",
 			"value": ""
 		}
 	]
