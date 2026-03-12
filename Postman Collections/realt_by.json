@@ -5924,6 +5924,29 @@
 						"url": "https://dev2.realt.by/bff/graphql"
 					},
 					"response": []
+				},
+				{
+					"name": "userViewByTokenWeb_0",
+					"id": "d08ec43e-66bf-4525-a9b1-79cc9e5ea519",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query userViewByTokenWeb {\r\n  userViewByTokenWeb {\r\n    id\r\n    uuid\r\n    firstName\r\n    lastName\r\n    fullName\r\n    email\r\n    phone\r\n    avatar\r\n    phones {\r\n      phoneNumber\r\n      status\r\n      verificationDate\r\n      __typename\r\n    }\r\n    roles {\r\n      roleIdentity\r\n      roleCode\r\n      __typename\r\n    }\r\n    agreements\r\n    __typename\r\n  }\r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": "https://dev2.realt.by/bff/graphql"
+					},
+					"response": []
 				}
 			],
 			"id": "9d244ce0-0549-48ae-abc3-3f0bf1c21f5e"
