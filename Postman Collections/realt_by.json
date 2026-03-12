@@ -6006,7 +6006,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "ad16b998-f603-4d6b-b49a-1daf5acf8e3c",
+				"id": "e905fa8a-b097-41c2-be75-c1d3d94df7f3",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
@@ -6017,7 +6017,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "f0ad6e4b-1221-4c69-bb1a-691343bb76e1",
+				"id": "ec852650-5a9b-41e2-9400-72731ecd2e63",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
@@ -6049,7 +6049,19 @@
 			"value": ""
 		},
 		{
-			"key": "dev_user_01_lord",
+			"key": "login_01_lord",
+			"value": ""
+		},
+		{
+			"key": "pass_01_lord",
+			"value": ""
+		},
+		{
+			"key": "login_01_user",
+			"value": ""
+		},
+		{
+			"key": "pass_01_user",
 			"value": ""
 		}
 	]
