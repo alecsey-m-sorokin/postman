@@ -5819,6 +5819,92 @@
 						"header": []
 					},
 					"response": []
+				},
+				{
+					"name": "userViewByTokenWeb",
+					"id": "48b893a0-c03c-435c-90cc-fc83085db862",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9,ru;q=0.8,tr;q=0.7"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://dev2.realt.by"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://dev2.realt.by/login/?nextPage=/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not:A-Brand\";v=\"99\", \"Google Chrome\";v=\"145\", \"Chromium\";v=\"145\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "x-realt-client",
+								"value": "www@6.3.0"
+							},
+							{
+								"key": "Cookie",
+								"value": "consent={%22analytics%22:true%2C%22advertising%22:true%2C%22functionality%22:true}; _ym_uid=1745655053239113952; _tt_enable_cookie=1; _ttp=01JSRJCFQJ1PJ2X64RYNSCVN1W_.tt.1; popmechanic_sbjs_migrations=popmechanic_1418474375998%3D1%7C%7C%7C1471519752600%3D1%7C%7C%7C1471519752605%3D1; mlsToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDg1MDg5NjgsImV4cCI6MTc4MDA0NDk2OCwidG9rZW5VdWlkIjoiYzJlNzg0MzgtM2M2YS0xMWYwLThkMDItMDI0MmFjMTIwMDAyIiwidXVpZCI6IjMwODZhODg2LWI5MTItNDEwMy1hZWVjLWEzYzYwN2FkM2IwYiJ9.ljYu_xzI0Cw7wVvMieFb4M_wXriOFqzM3AX1oIIcMuptnEL5Lfw2_wo6pdZ3fwyAePfnUONwjyGp2_HfIAe5otFYO7H4_jUTn0tyQKVv0oAcSeKC58_DJBqvm7SQuWUssf7Skrch6FjM6rr5xOuGsqj4aGYTrY6PhlVzW1nylK6kYx8zawH01pI-lXWUzQDmQmdQKWlWIrAszt8Ss682X5Pj93dyiVA5bv4lYnUaEAAClk1lNkxWCb1EVDmU0ErRHxMThdZ71BkB5KPBWaKA5gsAEoqeZ-L6A0BUir4Gsdj5gHo3CWN_co31kNQvlGzyiKPKbLFW80npOjX_IU03JKbGQz0emcdve7E8XCo8oQE7vU2Bj4ne6CmgppXap7-fluXp_CjGH1SceFdNK99PD6E3sDgbZw2EuBGJ1MaeAr9CFgVoaTCstSQSmXep7bf3Hr-zzLeLqDd5X06MC2tthI_IifoW2U9SvrsoKQXO650373zkPydyScxmHRFJKi3p_8JUK8NXWx9EGwkO0QRSPZgcqv3WPDhpCJx9yR8GSEC64bpoUGwSsgSor5MElUALKR8Hk-0I7gJARcrC92OVbZsv-7LOvn6j_gqZrfSor1CHDoUYAPR8ErdbwdaInfD0bw6srs5E_LEMq07p-wSgujDOV-MmGojw3HSOqsbsh-8; dev___guuid=5c254627-7b8f-5c2b-b9f2-157736e9acdc; _ym_d=1764603158; __afuuid=513c4870-ced0-11f0-8aba-092131c93ca2; dev___afuuid=a01f5080-dfca-11f0-ade4-b92c5f938668; dev_hasAuth=1; mindboxDeviceUUID=1282120d-2128-4f66-8e5a-a0ddc09a6b6f; directCrm-session=%7B%22deviceGuid%22%3A%221282120d-2128-4f66-8e5a-a0ddc09a6b6f%22%7D; ttcsid=1771485009952::ukF26MJpCkJJe7MwJDdA.51.1771485243000.0; ttcsid_D05MAFRC77U9AMELN5KG=1771485009952::joBwxE5r0qV7XgUEyX5W.31.1771485243001.0; _ga=GA1.2.274171692.1745655037; authToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NzI3MTI0MTksImV4cCI6MTgwNDI0ODQxOSwidG9rZW5VdWlkIjoiZDAxMWY5MTAtMTg4Yi0xMWYxLWIxODEtMDI0MmFjMTIwMDAyIiwidXVpZCI6ImJmZDIwZTYwLWI4NTktMTFmMC1hOTE1LTdiMTdlMGVjMGE4OCJ9.C5-v1EAcXpOU4SfsOFbV50c8DC1LcUBUOZD_Vi935181GDTyy2RcP2d9o5Os4Yn-_B0UT8lZSWhzs3Vz5d9Sq0hkfo2hoGdwfhGPjepSGhjnhdS4MTXqxraBW3fDJef_vwsFeeQaLsIojwY_DHqD_q7buSg-36uImfp7GLLrzsn8DAQOcVATAa_iY5WBlqEzwiSpk9eBU9p6Ge6yv4fYllffLWz9drSTIUhi36ig4Hi1Wf9u9pkkT6Ntn95tuqzI_k0QuXJU8lTaJMK-RztYam52KpGs5in3H0D2QOOglG5T3cC9oSrNTAb8MLOQ4dXbw10fPXHl7F-JUdsIB1z0BqLkrNqpRudcIgYCbKFXhauu1mu_KqNU-pVqJeQw6dIBdVUt3kuYg1wxJtrYkTFu9fjKfIDAMbR6xBCzN0qXgQ01SG95ZiHjAZdnQsbRZhySGL1SSU-rII4IG3bDn5Cou3-JNeKODiHnq04JkiQUQ00Yd0pnpeV4wxGWER1AGBpSQVKX0a2cjJ9j2olZTIUEW8e8p2HCsnz1Ya1JDEoKdLOgTb9Kb0JXYMj_1BD2zUVYDKDs-o4kJbVYTW2nXX-bq-enkrLr9qORWmE1V73KWDYknqH_2HMg8_BNIW8k-nZQUBdt2WUhDwxziG2OKmTCn3Lab1zGV-MXhJGrYHmzwBc; realt_user=01b6cc3b7347aa12d80968c9d946118b; realt_s_id.1.1251=b677e065632c922a.1773037701.; adminToken=; _gcl_au=1.2.1468747753.1768208028; dev2_realt_user=ef666ff2fc76521dfedcd63fab9818e3; _ga_3RLZ0E8JHQ=GS2.2.s1773305406$o73$g0$t1773305406$j60$l0$h1581551356; dev_adminToken=; dev_preAuthToken=; dev_preAuthTypo3Token=; realt_s_ref.1.1251=%5B%22%22%2C%22%22%2C1773311563%2C%22https%3A%2F%2Fadmin.dev.realt.by%2F%22%5D; realt_s_ses.1.1251=1; dev_authToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NzMzMTE1OTYsImV4cCI6MTgwNDg0NzU5NiwidG9rZW5VdWlkIjoiZTE2YzRiMDItMWRmZS0xMWYxLThhYjgtMDI0MmFjMTIwMDAzIiwidXVpZCI6IjM1ZGU5MWIwLTlmYWUtMTFmMC1iYzQ5LTYxNDc5YzE3NTJiMiJ9.gFV-5XjQsjCHWDlwyb9n5ayqnpJVL-tcogWPspcmYOesMwbWk-oi6Vo9Ch8sL0gg8VdkopfOXUVOy_OxvO4YveKBnQYhYvW0N0lP7xF6KFmD1uTaNzwASagU7I9hgl6qVeiEg1l-SDKc61suVqGO-Ib3D6hyRGgswBird9Hlz6nY4ZUHyB2Tsuq2bLQCpyvaMXz_156VXgR0AYgovqNGIhnKs7ZkaN7pFAAxNf4JD17n7tHR09sje3MQrsdyaIa_cXZU54hZTb_XfDk3NxGSO4C77oyxqFgtJ_sZY2KIfD7T3Z04bQbQLuEpjHS_5yDLn3ALWkeASYieWF9J2N76YwTSPQo0HNhm7R-EHLPyNWdZrjhQMku2DEsGMCs0LkBu2dIAT1yF-eH1f6oksvwxj79ZzlBleGiebZxmooznUmNCZjFHVMJN9nGl2zEMhzygiv17bXcSZErAQIynjHYA0lOvwEaYpN_3HHsQTlazrNYd2-eQH9VUn48ggg4d0pf-ASrqIzR24ZRzEaqD5wH5zlxSkfnK9jjRpeH3rLpOSqtuS89iHSK4_5kvgK39YXeMi8J01KDgB-hgqAMukt2Z2K5R-J7Bgdp-Sy3wKxMYQ90ut2HG-NFr56o37xeKldEhb0DI-AXX3JiLzY-k7gaEPxpvlFWpohN4gfSyYmamUOk; dev_realt_user=61931314acde727b195e6bdf3f8fa1c8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"operationName\":\"userViewByTokenWeb\",\"variables\":{},\"query\":\"query userViewByTokenWeb {\\n  userViewByTokenWeb {\\n    id\\n    uuid\\n    firstName\\n    lastName\\n    fullName\\n    email\\n    phone\\n    avatar\\n    phones {\\n      phoneNumber\\n      status\\n      verificationDate\\n      __typename\\n    }\\n    roles {\\n      roleIdentity\\n      roleCode\\n      __typename\\n    }\\n    agreements\\n    __typename\\n  }\\n}\"}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://dev2.realt.by/bff/graphql"
+					},
+					"response": []
 				}
 			],
 			"id": "9d244ce0-0549-48ae-abc3-3f0bf1c21f5e"
