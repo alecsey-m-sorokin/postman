@@ -108,7 +108,9 @@
 									"console.log(jsonData.data.login.body.token)\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
 							}
 						}
 					],
@@ -191,11 +193,11 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  login(login: \"paxix58825@nevyxus.com\", password: \"Oracle01\") {\r\n    success\r\n    errors {\r\n      code\r\n      message\r\n      title\r\n      field\r\n    }\r\n    body {\r\n      token\r\n      hasPassword\r\n      agreementsNotAccepted\r\n      agreements\r\n    }\r\n  }\r\n}",
+								"query": "mutation {\r\n  login(login: \"dev_user_01_lord@rover.info\", password: \"Oracle01\") {\r\n    success\r\n    errors {\r\n      code\r\n      message\r\n      title\r\n      field\r\n    }\r\n    body {\r\n      token\r\n      hasPassword\r\n      agreementsNotAccepted\r\n      agreements\r\n    }\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
-						"url": "https://dev.realt.by/bff/graphql"
+						"url": "https://dev2.realt.by/bff/graphql"
 					},
 					"response": []
 				},
