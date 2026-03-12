@@ -39,11 +39,11 @@
 							},
 							{
 								"key": "Origin",
-								"value": "https://dev.realt.by"
+								"value": "https://dev2.realt.by"
 							},
 							{
 								"key": "Referer",
-								"value": "https://dev.realt.by/login/?nextPage=https://dev.realt.by/"
+								"value": "https://dev2.realt.by/login/?nextPage=https://dev2.realt.by/"
 							},
 							{
 								"key": "Sec-Fetch-Dest",
@@ -85,7 +85,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query {\r\n    checkAccount(login: \"{{login}}\") {\r\n        body {\r\n            hasPassword\r\n            isFound\r\n        }\r\n        success\r\n        errors {\r\n            code\r\n            message\r\n            title\r\n            field\r\n        }\r\n    }\r\n}\r\n",
+								"query": "query {\r\n    checkAccount(login: \"dev_user_01_lord@rover.info\") {\r\n        body {\r\n            hasPassword\r\n            isFound\r\n        }\r\n        success\r\n        errors {\r\n            code\r\n            message\r\n            title\r\n            field\r\n        }\r\n    }\r\n}\r\n",
 								"variables": ""
 							}
 						},
