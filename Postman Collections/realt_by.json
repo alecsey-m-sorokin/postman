@@ -143,11 +143,11 @@
 							},
 							{
 								"key": "Origin",
-								"value": "https://dev.realt.by"
+								"value": "https://dev2.realt.by"
 							},
 							{
 								"key": "Referer",
-								"value": "https://dev.realt.by/login/?nextPage=https://dev.realt.by/"
+								"value": "https://dev2.realt.by/login/?nextPage=https://dev.realt.by/"
 							},
 							{
 								"key": "Sec-Fetch-Dest",
