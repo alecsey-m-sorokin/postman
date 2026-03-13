@@ -5629,7 +5629,7 @@
 							"variable": [
 								{
 									"key": "code",
-									"value": "2585777",
+									"value": "2585790",
 									"description": "dev2"
 								}
 							]
@@ -5746,7 +5746,7 @@
 							"variable": [
 								{
 									"key": "objectId",
-									"value": "2585784"
+									"value": "2585790"
 								}
 							]
 						},
@@ -5832,7 +5832,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation pricingCreatePaymentTrial($data: PricingCreatePaymentTrialInput!) {\r\n  pricingCreatePaymentTrial(data: $data)\r\n}",
-								"variables": "{\r\n  \"data\": {\r\n    \"code\": 2585788,\r\n    \"category\": 77\r\n  }\r\n}"
+								"variables": "{\r\n  \"data\": {\r\n    \"code\": 2585790,\r\n    \"category\": 77\r\n  }\r\n}"
 							}
 						},
 						"url": "https://dev2.realt.by/bff/graphql"
@@ -6006,7 +6006,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "452298b7-4651-4771-9c4d-d0f260e88be4",
+				"id": "2151d400-5360-4958-a2e4-348592f45adf",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
@@ -6017,7 +6017,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "cda616a3-b860-450f-9de3-17519d18896c",
+				"id": "3ddecd40-af54-4f89-bd80-d9648b2092f9",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
