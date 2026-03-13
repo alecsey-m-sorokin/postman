@@ -1754,7 +1754,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"operationDateTime\": \"2026-03-15T13:00:00.953Z\",\n  \"properties\": {\n    \"additionalProp1\": \"autotests_1\",\n    \"additionalProp2\": \"autotests_2\",\n    \"additionalProp3\": \"autotests_3\"\n  }\n}\n",
+									"raw": "{\n  \"operationDateTime\": \"2026-03-15T13:00:00.953Z\",\n  \"properties\": {\n    \"comment\": \"autotests\"\n  }\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
