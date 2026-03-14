@@ -1670,7 +1670,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"cashflowId\": {{credit_line_initialize_cashflow_id}},\n  \"cashflowDateTime\": \"2026-04-19T10:00:00\"\n}\n",
+									"raw": "{\n  \"cashflowId\": \"{{credit_line_initialize_cashflow_id}}\",\n  \"cashflowDateTime\": \"2026-04-19T10:00:00\"\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
