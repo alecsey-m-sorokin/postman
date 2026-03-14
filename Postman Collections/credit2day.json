@@ -1642,7 +1642,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"cashflowDateTime\": \"2026-03-19T09:00:00\",\n  \"issueAmount\": 100,\n  \"additionalProducts\": []\n//     {\n//         \"amount\": 1\n//     }\n//   ]\n}\n",
+									"raw": "{\n  \"cashflowDateTime\": \"2026-03-19T10:00:00\",\n  \"issueAmount\": 100,\n  \"additionalProducts\": []\n//     {\n//         \"amount\": 1\n//     }\n//   ]\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1670,7 +1670,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"cashflowId\": \"fd61e21b-6abf-47f4-baed-336fb3d5a170\",\n  \"cashflowDateTime\": \"2026-04-19T09:01:00\"\n//   \"external\": {\n//     \"provider\": \"string\",\n//     \"gateTransactionNum\": \"string\",\n//     \"providerTransactionNum\": \"string\",\n//     \"extData\": \"string\"\n//   },\n//   \"additionalProducts\": [\n//     {\n//       \"additionalProductId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n//       \"amount\": 1,\n//       \"principalId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n//       \"providerId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n//       \"taxType\": \"string\",\n//       \"taxRate\": 0,\n//       \"taxAmount\": 0,\n//       \"amountWithoutTax\": 0,\n//       \"additionalData\": \"string\",\n//       \"principalData\": \"string\",\n//       \"providerData\": \"string\"\n//     }\n//   ]\n}",
+									"raw": "{\n  \"cashflowId\": \"eb476ef1-1a45-429c-9d1b-c80f79f20c9e\",\n  \"cashflowDateTime\": \"2026-04-19T10:00:00\"\n//   \"external\": {\n//     \"provider\": \"string\",\n//     \"gateTransactionNum\": \"string\",\n//     \"providerTransactionNum\": \"string\",\n//     \"extData\": \"string\"\n//   },\n//   \"additionalProducts\": [\n//     {\n//       \"additionalProductId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n//       \"amount\": 1,\n//       \"principalId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n//       \"providerId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n//       \"taxType\": \"string\",\n//       \"taxRate\": 0,\n//       \"taxAmount\": 0,\n//       \"amountWithoutTax\": 0,\n//       \"additionalData\": \"string\",\n//       \"principalData\": \"string\",\n//       \"providerData\": \"string\"\n//     }\n//   ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1698,7 +1698,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"operationDateTime\": \"2026-04-19T09:01:00\",\n  \"issueAmount\": 100,\n  \"additionalProducts\": [\n  ]\n//   \"additionalProducts\": [\n//     {\n//       \"additionalProductId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n//       \"amount\": 1,\n//       \"principalId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n//       \"providerId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n//       \"taxType\": \"string\",\n//       \"taxRate\": 0,\n//       \"taxAmount\": 0,\n//       \"amountWithoutTax\": 0,\n//       \"additionalData\": \"string\",\n//       \"principalData\": \"string\",\n//       \"providerData\": \"string\"\n//     }\n//   ],\n//   \"payoutParams\": {\n//     \"payoutType\": \"string\",\n//     \"parameters\": {\n//       \"additionalProp1\": \"string\",\n//       \"additionalProp2\": \"string\",\n//       \"additionalProp3\": \"string\"\n//     }\n//   }\n}\n",
+									"raw": "{\n  \"operationDateTime\": \"2026-04-19T10:00:00\",\n  \"issueAmount\": 100,\n  \"additionalProducts\": [\n  ]\n//   \"additionalProducts\": [\n//     {\n//       \"additionalProductId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n//       \"amount\": 1,\n//       \"principalId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n//       \"providerId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n//       \"taxType\": \"string\",\n//       \"taxRate\": 0,\n//       \"taxAmount\": 0,\n//       \"amountWithoutTax\": 0,\n//       \"additionalData\": \"string\",\n//       \"principalData\": \"string\",\n//       \"providerData\": \"string\"\n//     }\n//   ],\n//   \"payoutParams\": {\n//     \"payoutType\": \"string\",\n//     \"parameters\": {\n//       \"additionalProp1\": \"string\",\n//       \"additionalProp2\": \"string\",\n//       \"additionalProp3\": \"string\"\n//     }\n//   }\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
