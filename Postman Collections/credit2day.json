@@ -1741,7 +1741,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"cashflowId\": \"eb476ef1-1a45-429c-9d1b-c80f79f20c9e\",\n  \"reason\": \"string\"\n}\n",
+									"raw": "{\n  \"cashflowId\": \"fba8b35f-c203-4c61-818c-d83100d7f8df\",\n  \"reason\": \"test_reason\"\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
