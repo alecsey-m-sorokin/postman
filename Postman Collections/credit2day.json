@@ -1683,6 +1683,21 @@
 						},
 						{
 							"name": "agreement Initialize new issue tranche for credit line is draft state",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c65d2fa4-5dec-410f-a3f9-df1c131465c7",
+										"exec": [
+											"var jsonData = pm.response.text();\r",
+											"pm.collectionVariables.set(\"credit_line_initialize_cashflow_id\", jsonData.cashflowId);"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
 							"id": "a54a71ab-7db6-4bda-88db-d12f8e810f85",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
