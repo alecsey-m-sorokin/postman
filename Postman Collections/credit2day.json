@@ -1689,9 +1689,12 @@
 									"script": {
 										"id": "c65d2fa4-5dec-410f-a3f9-df1c131465c7",
 										"exec": [
-											"var jsonData = pm.response.text();\r",
+											"var jsonData = pm.response.json();\r",
 											"\r",
 											"console.log(jsonData)\r",
+											"console.log(jsonData.cashflowId)\r",
+											"\r",
+											"\r",
 											"\r",
 											"pm.collectionVariables.set(\"credit_line_initialize_cashflow_id\", jsonData.cashflowId);\r",
 											""
@@ -1745,7 +1748,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"cashflowId\": \"fba8b35f-c203-4c61-818c-d83100d7f8df\",\n  \"reason\": \"test_reason\"\n}\n",
+									"raw": "{\n  \"cashflowId\": \"4c1abd24-e362-46fc-bfea-9c566554038c\",\n  \"reason\": \"test_reason\"\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
