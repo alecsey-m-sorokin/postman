@@ -1743,7 +1743,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"cashflowId\": {{credit_line_initialize_cashflow_id}},\n  \"reason\": \"test_reason\"\n}\n",
+									"raw": "{\n  \"cashflowId\": \"{{credit_line_initialize_cashflow_id}}\",\n  \"reason\": \"test_reason\"\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4799,7 +4799,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "4a22c010-28e2-4dc0-9550-190d6db8a786",
+				"id": "84a4761c-ad30-4baf-a66d-061670853753",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
@@ -4868,7 +4868,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "85caea26-f848-42ea-87d7-4e3b0002905d",
+				"id": "0fe74ab9-8937-466e-b439-b0e03ea53bd4",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
