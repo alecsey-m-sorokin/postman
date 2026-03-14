@@ -1690,7 +1690,11 @@
 										"id": "c65d2fa4-5dec-410f-a3f9-df1c131465c7",
 										"exec": [
 											"var jsonData = pm.response.text();\r",
-											"pm.collectionVariables.set(\"credit_line_initialize_cashflow_id\", jsonData.cashflowId);"
+											"\r",
+											"console.log(jsonData)\r",
+											"\r",
+											"pm.collectionVariables.set(\"credit_line_initialize_cashflow_id\", jsonData.cashflowId);\r",
+											""
 										],
 										"type": "text/javascript",
 										"packages": {},
