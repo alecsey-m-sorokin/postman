@@ -5692,7 +5692,7 @@
 							"variable": [
 								{
 									"key": "objectId",
-									"value": "2585790"
+									"value": "2585791"
 								}
 							]
 						},
@@ -5746,7 +5746,7 @@
 							"variable": [
 								{
 									"key": "objectId",
-									"value": "2585790"
+									"value": "2585791"
 								}
 							]
 						},
@@ -5832,7 +5832,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation pricingCreatePaymentTrial($data: PricingCreatePaymentTrialInput!) {\r\n  pricingCreatePaymentTrial(data: $data)\r\n}",
-								"variables": "{\r\n  \"data\": {\r\n    \"code\": 2585790,\r\n    \"category\": 77\r\n  }\r\n}"
+								"variables": "{\r\n  \"data\": {\r\n    \"code\": 2585791,\r\n    \"category\": 77\r\n  }\r\n}"
 							}
 						},
 						"url": "https://dev2.realt.by/bff/graphql"
