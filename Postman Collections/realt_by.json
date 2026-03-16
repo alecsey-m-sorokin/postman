@@ -5914,7 +5914,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[{\"operationName\":\"userViewByTokenWeb\",\"variables\":{},\"query\":\"query userViewByTokenWeb {\\n  userViewByTokenWeb {\\n    id\\n    uuid\\n    firstName\\n    lastName\\n    fullName\\n    email\\n    phone\\n    avatar\\n    phones {\\n      phoneNumber\\n      status\\n      verificationDate\\n      __typename\\n    }\\n    roles {\\n      roleIdentity\\n      roleCode\\n      __typename\\n    }\\n    agreements\\n    __typename\\n  }\\n}\"}]",
+							"raw": "[\r\n  {\r\n    \"operationName\": \"userViewByTokenWeb\",\r\n    \"variables\": {},\r\n    \"query\": \"query userViewByTokenWeb {\\n  userViewByTokenWeb {\\n    id\\n    uuid\\n    firstName\\n    lastName\\n    fullName\\n    email\\n    phone\\n    avatar\\n    phones {\\n      phoneNumber\\n      status\\n      verificationDate\\n      __typename\\n    }\\n    roles {\\n      roleIdentity\\n      roleCode\\n      __typename\\n    }\\n    agreements\\n    __typename\\n  }\\n}\"\r\n  }\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
