@@ -5835,7 +5835,7 @@
 								"variables": "{\r\n  \"data\": {\r\n    \"code\": 2586281,\r\n    \"category\": 77\r\n  }\r\n}"
 							}
 						},
-						"url": "{{stage_bff_graphql}}}/bff/graphql"
+						"url": "{{stage_bff_graphql}}/bff/graphql"
 					},
 					"response": []
 				},
@@ -5921,7 +5921,7 @@
 								}
 							}
 						},
-						"url": "https://dev2.realt.by/bff/graphql"
+						"url": "{{stage_bff_graphql}}/bff/graphql"
 					},
 					"response": []
 				},
@@ -5959,7 +5959,7 @@
 									"const authToken = pm.cookies.get(\"dev_authToken\");\r",
 									"\r",
 									"if (authToken) {\r",
-									"    pm.environment.set(\"authToken\", authToken);\r",
+									"    pm.collectionVariables.set(\"authToken\", authToken);\r",
 									"    console.log(\"dev_authToken успешно сохранён в переменную: \" + authToken);\r",
 									"} else {\r",
 									"    console.log(\"Кука dev_authToken не найдена в ответе\");\r",
@@ -5989,7 +5989,7 @@
 								"variables": "{\r\n  \"login\": \"dev_user_01_lord@rover.info\",\r\n  \"pass\": \"Oracle01\"\r\n}\r\n"
 							}
 						},
-						"url": "https://dev2.realt.by/bff/graphql"
+						"url": "{{stage_bff_graphql}}/bff/graphql"
 					},
 					"response": []
 				}
