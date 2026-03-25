@@ -5832,10 +5832,10 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation pricingCreatePaymentTrial($data: PricingCreatePaymentTrialInput!) {\r\n  pricingCreatePaymentTrial(data: $data)\r\n}",
-								"variables": "{\r\n  \"data\": {\r\n    \"code\": 2585793,\r\n    \"category\": 77\r\n  }\r\n}"
+								"variables": "{\r\n  \"data\": {\r\n    \"code\": 2586281,\r\n    \"category\": 77\r\n  }\r\n}"
 							}
 						},
-						"url": "https://dev2.realt.by/bff/graphql"
+						"url": "https://dev.realt.by/bff/graphql"
 					},
 					"response": []
 				},
@@ -6006,7 +6006,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "96061d4a-588c-4551-8dbc-78dcb84fb90f",
+				"id": "e05959d5-92e9-4689-976c-2bf52f82e57b",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
@@ -6017,7 +6017,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "b1999120-62a2-4a3f-806c-fa9b467df1ac",
+				"id": "06c9ade2-389a-40f9-9698-2dad5b434e95",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
@@ -6062,6 +6062,10 @@
 		},
 		{
 			"key": "pass_01_user",
+			"value": ""
+		},
+		{
+			"key": "stageql_",
 			"value": ""
 		}
 	]
