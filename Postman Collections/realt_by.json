@@ -5835,7 +5835,7 @@
 								"variables": "{\r\n  \"data\": {\r\n    \"code\": 2586281,\r\n    \"category\": 77\r\n  }\r\n}"
 							}
 						},
-						"url": "https://dev.realt.by/bff/graphql"
+						"url": "{{stage_bff_graphql}}}/bff/graphql"
 					},
 					"response": []
 				},
@@ -6006,7 +6006,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "e05959d5-92e9-4689-976c-2bf52f82e57b",
+				"id": "0be095bf-85b9-4b32-bb64-dd7a4bf64221",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
@@ -6017,7 +6017,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "06c9ade2-389a-40f9-9698-2dad5b434e95",
+				"id": "bd2e6d7f-eab1-49eb-86c3-d6d6882a5c25",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
@@ -6065,8 +6065,13 @@
 			"value": ""
 		},
 		{
-			"key": "stageql_",
+			"key": "stage_bff_graphql",
 			"value": ""
+		},
+		{
+			"key": "stage_bff_graphql",
+			"value": "",
+			"disabled": true
 		}
 	]
 }
