@@ -1505,7 +1505,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"rollbackToDateTime\": \"2026-02-03T11:00:00\",\n//   \"rollbackToDateTime\": \"2025-12-29T11:00:00\",\n  \"rollbackOptions\": {\n    \"repayments\": true,\n    \"withdrawAddProducts\": true,\n    \"creditHolidays\": true,\n    \"creditHolidaysEnds\": true,\n    \"prolongations\": true\n  }\n}",
+									"raw": "{\n  \"rollbackToDateTime\": \"2026-02-14T11:00:00\",\n//   \"rollbackToDateTime\": \"2025-12-29T11:00:00\",\n  \"rollbackOptions\": {\n    \"repayments\": true,\n    \"withdrawAddProducts\": true,\n    \"creditHolidays\": true,\n    \"creditHolidaysEnds\": true,\n    \"prolongations\": true\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1567,7 +1567,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"repayments\": [\n    {\n      \"cashflowDateTime\": \"2026-02-03T11:00:00\",\n    //   \"cashflowDateTime\": \"2026-12-29T11:00:00\",\n      \"amount\": 7400.00,\n      \"paymentSystemInfo\": {\n        \"provider\": \"BANK\",\n       \"cashflowDateTime\": \"2026-02-03T11:00:00\",\n    //    \"transactionDate\": \"2025-12-29T11:00:00\",\n        \"providerTransactionNum\": \"{{$randomUUID}}\",\n        \"gatewayTransactionNum\": \"{{$randomUUID}}\"\n      },\n      \"parameters\": {\n        \"receivedFromLegalEntity\": false\n      },\n      \"extData\": {\n        \"additionalProp1\": \"autotests\",\n        \"additionalProp2\": \"autotests\",\n        \"additionalProp3\": \"autotests\"\n      }\n    }\n  ],\n  \"leaveAgreementLocked\": false\n}\n",
+									"raw": "{\n  \"repayments\": [\n    {\n      \"cashflowDateTime\": \"2026-02-14T11:00:00\",\n    //   \"cashflowDateTime\": \"2026-12-29T11:00:00\",\n      \"amount\": 100.00,\n      \"paymentSystemInfo\": {\n        \"provider\": \"BANK\",\n       \"cashflowDateTime\": \"2026-02-14T11:00:00\",\n    //    \"transactionDate\": \"2025-12-29T11:00:00\",\n        \"providerTransactionNum\": \"{{$randomUUID}}\",\n        \"gatewayTransactionNum\": \"{{$randomUUID}}\"\n      },\n      \"parameters\": {\n        \"receivedFromLegalEntity\": false\n      },\n      \"extData\": {\n        \"additionalProp1\": \"autotests\",\n        \"additionalProp2\": \"autotests\",\n        \"additionalProp3\": \"autotests\"\n      }\n    }\n  ],\n  \"leaveAgreementLocked\": false\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
