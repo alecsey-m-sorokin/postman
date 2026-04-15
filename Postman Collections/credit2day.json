@@ -517,6 +517,66 @@
 							"response": []
 						},
 						{
+							"name": "agreement virtual prolongation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "bba33459-efba-44db-a05e-0bd801add2e8",
+										"exec": [
+											"var jsonData = pm.response.json()\r",
+											"\r",
+											"// pm.environment.set(\"repayment_token\", jsonData.outData.client_id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "62347838-63b0-4f98-bec5-37a0ce561491",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{app_rep_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{charges_url}}/Agreements/{{agreement_id}}/timeline/?withCancelled=true&withRawData=true&withTransactionsIds=true",
+									"host": [
+										"{{charges_url}}"
+									],
+									"path": [
+										"Agreements",
+										"{{agreement_id}}",
+										"timeline",
+										""
+									],
+									"query": [
+										{
+											"key": "withCancelled",
+											"value": "true"
+										},
+										{
+											"key": "withRawData",
+											"value": "true"
+										},
+										{
+											"key": "withTransactionsIds",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "agreement CASHFLOWS (1)",
 							"event": [
 								{
