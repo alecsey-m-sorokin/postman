@@ -614,7 +614,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{charges_url}}/Agreements/{{agreement_id}}?include=docs,product,product.interests,offers,offers.cashflow,offers.product,offers.info,offers.docs,offers.addProducts,primary.cashflow,primary.product,primary.info,primary.docs,primary.addProducts,withdrawAddProducts,additionalProducts,issueTranches",
+									"raw": "{{charges_url}}/Agreements/{{agreement_id}}?include=docs,product,product.interests,offers,offers.cashflow,offers.product,offers.info,offers.docs,offers.addProducts,primary.cashflow,primary.product,primary.info,primary.docs,primary.addProducts,withdrawAddProducts,additionalProducts,issueTranches,legalLimits",
 									"host": [
 										"{{charges_url}}"
 									],
@@ -676,7 +676,7 @@
 										},
 										{
 											"key": "include",
-											"value": "docs,product,product.interests,offers,offers.cashflow,offers.product,offers.info,offers.docs,offers.addProducts,primary.cashflow,primary.product,primary.info,primary.docs,primary.addProducts,withdrawAddProducts,additionalProducts,issueTranches"
+											"value": "docs,product,product.interests,offers,offers.cashflow,offers.product,offers.info,offers.docs,offers.addProducts,primary.cashflow,primary.product,primary.info,primary.docs,primary.addProducts,withdrawAddProducts,additionalProducts,issueTranches,legalLimits"
 										},
 										{
 											"key": "include",
