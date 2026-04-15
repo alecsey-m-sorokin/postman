@@ -416,7 +416,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"date\": \"2026-09-04\"\n}\n\n// {\n//   \"date\": \"{{period_2}}\"\n// }\n",
+									"raw": "{\n  \"date\": \"2026-04-31\"\n}\n\n// {\n//   \"date\": \"{{period_2}}\"\n// }\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -549,7 +549,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{charges_url}}/Agreements/{{agreement_id}}/prolongation/virtual?RepaymentAmount",
+									"raw": "{{charges_url}}/Agreements/{{agreement_id}}/prolongation/virtual?RepaymentAmount=160",
 									"host": [
 										"{{charges_url}}"
 									],
@@ -562,7 +562,7 @@
 									"query": [
 										{
 											"key": "RepaymentAmount",
-											"value": null
+											"value": "160"
 										}
 									]
 								}
