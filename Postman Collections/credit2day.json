@@ -530,7 +530,8 @@
 											""
 										],
 										"type": "text/javascript",
-										"packages": {}
+										"packages": {},
+										"requests": {}
 									}
 								}
 							],
@@ -548,28 +549,20 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{charges_url}}/Agreements/{{agreement_id}}/timeline/?withCancelled=true&withRawData=true&withTransactionsIds=true",
+									"raw": "{{charges_url}}/Agreements/{{agreement_id}}/prolongation/virtual?RepaymentAmount",
 									"host": [
 										"{{charges_url}}"
 									],
 									"path": [
 										"Agreements",
 										"{{agreement_id}}",
-										"timeline",
-										""
+										"prolongation",
+										"virtual"
 									],
 									"query": [
 										{
-											"key": "withCancelled",
-											"value": "true"
-										},
-										{
-											"key": "withRawData",
-											"value": "true"
-										},
-										{
-											"key": "withTransactionsIds",
-											"value": "true"
+											"key": "RepaymentAmount",
+											"value": null
 										}
 									]
 								}
