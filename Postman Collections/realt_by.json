@@ -5832,7 +5832,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation pricingCreatePaymentTrial($data: PricingCreatePaymentTrialInput!) {\r\n  pricingCreatePaymentTrial(data: $data)\r\n}",
-								"variables": "{\r\n  \"data\": {\r\n    \"code\": 2586281,\r\n    \"category\": 77\r\n  }\r\n}"
+								"variables": "{\r\n  \"data\": {\r\n    \"code\": 2586714,\r\n    \"category\": 77\r\n  }\r\n}"
 							}
 						},
 						"url": "{{stage_bff_graphql}}/bff/graphql"
@@ -6006,7 +6006,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "f00ba9a8-1afe-453d-ad11-63b52baccc11",
+				"id": "60ec4a0c-859e-46a3-ab3f-fc59ebf80779",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
@@ -6017,7 +6017,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "4939bdf0-44f9-4ec5-8203-9753b6a78f2c",
+				"id": "2a884fce-27d3-4439-b5d0-a0c588664220",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
@@ -6066,12 +6066,12 @@
 		},
 		{
 			"key": "stage_bff_graphql",
-			"value": ""
+			"value": "",
+			"disabled": true
 		},
 		{
 			"key": "stage_bff_graphql",
-			"value": "",
-			"disabled": true
+			"value": ""
 		},
 		{
 			"key": "authToken",
