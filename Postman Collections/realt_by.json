@@ -6006,7 +6006,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "0be095bf-85b9-4b32-bb64-dd7a4bf64221",
+				"id": "f00ba9a8-1afe-453d-ad11-63b52baccc11",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
@@ -6017,7 +6017,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "bd2e6d7f-eab1-49eb-86c3-d6d6882a5c25",
+				"id": "4939bdf0-44f9-4ec5-8203-9753b6a78f2c",
 				"type": "text/javascript",
 				"requests": {},
 				"exec": [
@@ -6029,12 +6029,12 @@
 	"variable": [
 		{
 			"key": "stage",
-			"value": ""
+			"value": "",
+			"disabled": true
 		},
 		{
 			"key": "stage",
-			"value": "",
-			"disabled": true
+			"value": ""
 		},
 		{
 			"key": "x_user_uuid",
