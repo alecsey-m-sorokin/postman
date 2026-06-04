@@ -5595,6 +5595,31 @@
 						"url": "http://notification.test2.realt.by/api/rpc/v1/prepare-notification"
 					},
 					"response": []
+				},
+				{
+					"name": "booking-object-vas-remind - dev2",
+					"id": "1f5bd5ed-266a-4bfd-927f-80d704955595",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"notificationUuid\": \"12ac9a29-fd12-11f5-b114-97fbe5254a0d\",\r\n    \"templateName\": \"booking-byn-balance-weekly-remind\",\r\n    \"userUuid\": \"3a822830-1373-11ef-a60a-a3f8aa1bb582\",\r\n    \"globalParams\": {\r\n\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://notification.test2.realt.by/api/rpc/v1/prepare-notification"
+					},
+					"response": []
 				}
 			],
 			"id": "de6c94a8-7f01-46d0-b2a7-ed61fe31606f"
