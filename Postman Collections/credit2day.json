@@ -1757,6 +1757,13 @@
 										"packages": {},
 										"requests": {}
 									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"packages": {},
+										"type": "text/javascript"
+									}
 								}
 							],
 							"id": "a54a71ab-7db6-4bda-88db-d12f8e810f85",
@@ -1774,7 +1781,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"operationDateTime\": \"2026-03-19T10:00:00\",\n  \"issueAmount\": 500,\n  \"additionalProducts\": [\n  ]\n}\n",
+									"raw": "{\n  \"operationDateTime\": \"2026-07-18T10:00:00\",\n  \"issueAmount\": 1000,\n  \"additionalProducts\": [\n  ]\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
