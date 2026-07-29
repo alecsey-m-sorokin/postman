@@ -1849,7 +1849,7 @@
 							"response": []
 						},
 						{
-							"name": "create application - Creditline_180_08p",
+							"name": "create application - Installment_credit_line_test_***",
 							"event": [
 								{
 									"listen": "prerequest",
