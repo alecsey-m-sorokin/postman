@@ -6028,7 +6028,377 @@
 		},
 		{
 			"name": "test_api",
-			"item": [],
+			"item": [
+				{
+					"name": "1.1 Авторизация — Логин",
+					"event": [
+						{
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const j = pm.response.json();",
+									"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+									"if (j.success) {",
+									"  pm.collectionVariables.set('api_token', j.body.accessToken);",
+									"  pm.collectionVariables.set('api_refreshToken', j.body.refreshToken);",
+									"}"
+								]
+							},
+							"listen": "test"
+						}
+					],
+					"id": "9a7ba414-28d3-82b6-7b77-d36edab83744",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"apiLogin\": \"test_api\",\n  \"apiPassword\": \"Oracle01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/auth/login",
+						"description": "Документация: https://dev3.realt.by/bff/proxy/api/public/docs\nВозвращает accessToken (15 мин) и refreshToken (30 дней). Тест-скрипт сохраняет их в переменные коллекции api_token / api_refreshToken."
+					},
+					"response": []
+				},
+				{
+					"name": "1.2 Авторизация — Обновить токены",
+					"event": [
+						{
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const j = pm.response.json();",
+									"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+									"if (j.success) {",
+									"  pm.collectionVariables.set('api_token', j.body.accessToken);",
+									"  pm.collectionVariables.set('api_refreshToken', j.body.refreshToken);",
+									"}"
+								]
+							},
+							"listen": "test"
+						}
+					],
+					"id": "c4d6f848-d0a4-32b2-683e-8319caa4ecfc",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"value": "application/json",
+								"key": "Content-Type"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"refreshToken\": \"{{api_refreshToken}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/auth/refresh",
+						"description": "Ротация пары токенов. Предыдущие токены перестают действовать."
+					},
+					"response": []
+				},
+				{
+					"name": "1.3 Авторизация — Выйти",
+					"id": "e881d281-4650-9372-7b48-ef1a3474a9f0",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{api_token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/auth/logout",
+						"description": "Завершает сессию. Токены перестают действовать."
+					},
+					"response": []
+				},
+				{
+					"name": "2.1 Объявления — Создать объявление",
+					"event": [
+						{
+							"script": {
+								"exec": [
+									"const j = pm.response.json();",
+									"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+									"if (j.success) {",
+									"  pm.collectionVariables.set('api_uuid', j.body.uuid);",
+									"  pm.collectionVariables.set('api_processUuid', j.body.processUuid);",
+									"  pm.collectionVariables.set('api_code', j.body.code);",
+									"}"
+								],
+								"type": "text/javascript"
+							},
+							"listen": "test"
+						}
+					],
+					"id": "f7309ba8-ebfa-43f2-cb99-112f261db143",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{api_token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"category\": \"as\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа 2-комнатной квартиры\",\n    \"headline\": \"Двухкомнатная квартира в новом доме у метро, свежий ремонт и парковка\",\n    \"description\": \"Свежий ремонт, окна во двор, рядом школа и парк.\"\n  },\n  \"ownerInfo\": {},\n  \"objectParams\": {\n    \"rooms\": 2,\n    \"storey\": 3,\n    \"storeys\": 9,\n    \"areaTotal\": 55.5,\n    \"areaLiving\": 30.2,\n    \"balconiesCount\": 1,\n    \"facilities\": [],\n    \"backyardImprovement\": [],\n    \"facilitiesForDisabledPeople\": []\n  },\n  \"buildingInfo\": {\n    \"buildingYear\": 2020\n  },\n  \"termsOfSale\": {\n    \"price\": 85000,\n    \"priceCurrency\": 840,\n    \"terms\": 1\n  },\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&fm=jpg\",\n    \"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&fm=jpg\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+						"description": "Создаёт объявление (category: as / offs / pls / coms). Фото грузятся асинхронно, статус — по processUuid. Тест-скрипт сохраняет api_uuid, api_processUuid, api_code."
+					},
+					"response": []
+				},
+				{
+					"name": "2.2 Объявления — Обновить объявление",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const j = pm.response.json();",
+									"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+									"if (j.success && j.body && j.body.processUuid) pm.collectionVariables.set('api_processUuid', j.body.processUuid);"
+								]
+							}
+						}
+					],
+					"id": "93c61285-aa73-6554-a1a0-6a2c17c7998a",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{api_token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"value": "application/json",
+								"key": "Content-Type"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"category\": \"as\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа 2-комнатной квартиры\",\n    \"headline\": \"Двухкомнатная квартира в новом доме у метро, свежий ремонт и парковка\",\n    \"description\": \"Свежий ремонт, окна во двор, рядом школа и парк.\"\n  },\n  \"ownerInfo\": {},\n  \"objectParams\": {\n    \"rooms\": 2,\n    \"storey\": 3,\n    \"storeys\": 9,\n    \"areaTotal\": 55.5,\n    \"areaLiving\": 30.2,\n    \"balconiesCount\": 1,\n    \"facilities\": [],\n    \"backyardImprovement\": [],\n    \"facilitiesForDisabledPeople\": []\n  },\n  \"buildingInfo\": {\n    \"buildingYear\": 2020\n  },\n  \"termsOfSale\": {\n    \"price\": 82000,\n    \"priceCurrency\": 840,\n    \"terms\": 1\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_uuid}}",
+						"description": "Без photoUrls — фото не трогаются; photoUrls: [] — фото снимаются; непустой photoUrls — новая загрузка (вернётся processUuid). Пока идёт другая операция — 409."
+					},
+					"response": []
+				},
+				{
+					"name": "2.3 Объявления — Статус операции",
+					"id": "0a37bebb-0331-c151-0a58-feffe48a3438",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{api_token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/operations/{{api_processUuid}}",
+						"description": "processUuid из ответа создания/обновления. Возвращает objectStatus, photoStatus (pending/done/failed), failedUrls."
+					},
+					"response": []
+				},
+				{
+					"name": "2.4 Объявления — Перенести в архив",
+					"id": "e57e451c-5dff-b8a8-cc79-54ad6a2fb9fb",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{api_token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"uuids\": [\n    \"{{api_uuid}}\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/archive"
+					},
+					"response": []
+				},
+				{
+					"name": "2.5 Объявления — Вернуть из архива",
+					"id": "7bf2c9da-e3ef-bbdf-1f2e-3fa393b165b9",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{api_token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"value": "application/json",
+								"key": "Content-Type"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"uuids\": [\n    \"{{api_uuid}}\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/restore"
+					},
+					"response": []
+				},
+				{
+					"name": "2.6 Объявления — Список объявлений",
+					"id": "af34a4a3-ea2c-603d-1b90-ea39cc60f224",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{api_token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"where\": {},\n  \"pagination\": {\n    \"page\": 1,\n    \"pageSize\": 20\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/search"
+					},
+					"response": []
+				},
+				{
+					"name": "3.1 Справочники — Список категорий",
+					"id": "73b42145-afad-390a-3bde-d5cadf96255e",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{api_token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories",
+						"description": "Категории, открытые в API: as(5), offs(20), pls(27), coms(18)."
+					},
+					"response": []
+				},
+				{
+					"name": "3.2 Справочники — Значения полей категории",
+					"id": "22101ab1-9075-952d-918c-2189f73f0503",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{api_token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories/5/shortcuts",
+						"description": "Допустимые значения полей (название → код) для categoryId: 5 as, 20 offs, 27 pls, 18 coms."
+					},
+					"response": []
+				},
+				{
+					"name": "3.3 Справочники — Поиск адреса",
+					"id": "7cf415ac-6084-d90b-77a3-d3f3a9e24462",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{api_token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"value": "application/json",
+								"key": "Content-Type"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"where\": {\n    \"title\": \"Минск\"\n  },\n  \"pageSize\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/geo/search",
+						"description": "type: 1 регион, 2 район обл., 3 город, 4 район города, 5 микрорайон, 6 улица, 7 метро. Найденные uuid передаются в locationInfo."
+					},
+					"response": []
+				}
+			],
 			"id": "5ad6d578-7576-4697-9c2c-104a7a8e4d08"
 		}
 	],
@@ -6105,6 +6475,14 @@
 		},
 		{
 			"key": "authToken",
+			"value": ""
+		},
+		{
+			"key": "api_token",
+			"value": ""
+		},
+		{
+			"key": "api_refreshToken",
 			"value": ""
 		}
 	]
