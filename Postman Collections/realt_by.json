@@ -6881,7 +6881,177 @@
 				},
 				{
 					"name": "4.4 coms - CommercialSale",
-					"item": [],
+					"item": [
+						{
+							"name": "coms 1 — Создать объявление",
+							"event": [
+								{
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"const j = pm.response.json();",
+											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+											"if (j.success) {",
+											"  pm.collectionVariables.set('api_coms_uuid', j.body.uuid);",
+											"  pm.collectionVariables.set('api_coms_processUuid', j.body.processUuid);",
+											"  pm.collectionVariables.set('api_coms_code', j.body.code);",
+											"}"
+										]
+									},
+									"listen": "test"
+								}
+							],
+							"id": "26b96e89-141f-1400-4c54-d28889c45d18",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"coms\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа торгового помещения\",\n    \"headline\": \"Торговое помещение на первой линии, высокий трафик, витрины на проспект\",\n    \"description\": \"Торговое помещение с витринами, отдельный вход, разгрузочная зона.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 15,\n    \"objectTypeExtra\": [15],\n    \"areaTotal\": 140,\n    \"storey\": 1,\n    \"storeys\": 5,\n    \"repairState\": 2\n  },\n  \"termsOfSale\": {\n    \"price\": 210000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  },\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&fm=jpg\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"description": "Продажа коммерческой недвижимости (coms, categoryId 18). Обязательные: category, photoUrls (min 1), contactInfo, locationInfo, objectInfo, ownerInfo, termsOfSale, textData. objectType (shortcuts 18): магазин 27, павильон 22, торговое место 31, торговый центр 33, торговое помещение 15, киоск 47, аптека 18, бутик 46, стрит ритэйл 34. terms = 9. Внимание (REALT-12039): цена и площадь у коммерции сейчас не сохраняются; update → 404. Скрипт сохраняет api_coms_uuid / api_coms_processUuid / api_coms_code."
+							},
+							"response": []
+						},
+						{
+							"name": "coms 2 — Статус операции",
+							"id": "dec9b86f-b238-1185-ddd7-26ffa1b8ea03",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/operations/{{api_coms_processUuid}}"
+							},
+							"response": []
+						},
+						{
+							"name": "coms 3 — Найти в списке по коду",
+							"id": "b706e2d0-0fa6-5005-a9f8-d3a4d2c3f0b1",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"where\": {\n    \"code\": {{api_coms_code}}\n  },\n  \"pagination\": {\n    \"page\": 1,\n    \"pageSize\": 1\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/search",
+								"description": "REALT-12039 №5: коммерческие объявления сейчас не попадают в список."
+							},
+							"response": []
+						},
+						{
+							"name": "coms 4 — Обновить (без фото)",
+							"id": "325ae19a-8219-1454-c83e-886e2fd75e1e",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"coms\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа торгового помещения\",\n    \"headline\": \"Торговое помещение на первой линии, высокий трафик, витрины на проспект\",\n    \"description\": \"Торговое помещение с витринами, отдельный вход, разгрузочная зона.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 15,\n    \"objectTypeExtra\": [15],\n    \"areaTotal\": 140,\n    \"storey\": 1,\n    \"storeys\": 5,\n    \"repairState\": 3\n  },\n  \"termsOfSale\": {\n    \"price\": 200000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_coms_uuid}}",
+								"description": "REALT-12039 №2: update offs/pls/coms сейчас возвращает 404."
+							},
+							"response": []
+						},
+						{
+							"name": "coms 5 — Обновить с новыми фото",
+							"event": [
+								{
+									"script": {
+										"exec": [
+											"const j = pm.response.json();",
+											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+											"if (j.success && j.body && j.body.processUuid) pm.collectionVariables.set('api_coms_processUuid', j.body.processUuid);"
+										],
+										"type": "text/javascript"
+									},
+									"listen": "test"
+								}
+							],
+							"id": "88937177-558b-ede7-b6d6-be7c960528fe",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"coms\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа торгового помещения\",\n    \"headline\": \"Торговое помещение на первой линии, высокий трафик, витрины на проспект\",\n    \"description\": \"Торговое помещение с витринами, отдельный вход, разгрузочная зона.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 15,\n    \"objectTypeExtra\": [15],\n    \"areaTotal\": 140,\n    \"storey\": 1,\n    \"storeys\": 5,\n    \"repairState\": 2\n  },\n  \"termsOfSale\": {\n    \"price\": 200000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  },\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=1200&fm=jpg\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_coms_uuid}}"
+							},
+							"response": []
+						}
+					],
 					"id": "bda3d9d3-606c-4db2-b0fc-ed5deef09fd7"
 				},
 				{
