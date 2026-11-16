@@ -7483,6 +7483,23 @@
 					"response": []
 				},
 				{
+					"name": "3.1 Справочники — Список категорий Copy",
+					"id": "a1fb8d8e-fcfd-41d1-86a6-385ae12a970e",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{api_token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories",
+						"description": "Категории, открытые в API: as(5), offs(20), pls(27), coms(18)."
+					},
+					"response": []
+				},
+				{
 					"name": "3.2 Справочники — Значения полей категории",
 					"id": "22101ab1-9075-952d-918c-2189f73f0503",
 					"request": {
