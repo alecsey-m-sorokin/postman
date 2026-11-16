@@ -6322,8 +6322,290 @@
 				},
 				{
 					"name": "4.2 offs - OfficeSale",
-					"item": [],
+					"item": [
+						{
+							"name": "offs 1 — Создать объявление",
+							"event": [
+								{
+									"script": {
+										"exec": [
+											"const j = pm.response.json();",
+											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+											"if (j.success) {",
+											"  pm.collectionVariables.set('api_offs_uuid', j.body.uuid);",
+											"  pm.collectionVariables.set('api_offs_processUuid', j.body.processUuid);",
+											"  pm.collectionVariables.set('api_offs_code', j.body.code);",
+											"}"
+										],
+										"type": "text/javascript"
+									},
+									"listen": "test"
+								}
+							],
+							"id": "52b5d4d6-83a5-819b-5c2f-fb58e7b9d353",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"offs\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа офиса\",\n    \"headline\": \"Офис в бизнес-центре у метро, отделка под ключ, парковка и охрана\",\n    \"description\": \"Офис с отделкой, кондиционер, охрана, парковка.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 17,\n    \"objectTypeExtra\": [17],\n    \"areaTotal\": 120.5,\n    \"storey\": 2,\n    \"storeys\": 5,\n    \"repairState\": 2\n  },\n  \"termsOfSale\": {\n    \"price\": 150000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  },\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&fm=jpg\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"description": "Продажа офисов (offs, categoryId 20). Обязательные: category, photoUrls (min 1), contactInfo, locationInfo, objectInfo, ownerInfo, termsOfSale, textData. Нет objectParams/buildingInfo. objectInfo.objectType / objectTypeExtra — коды из shortcuts 20 (офис 17, офис+склад 53, квартира+офис 36, коворкинг 40). terms = 9 (Продажа). Внимание (REALT-12039): цена и площадь у коммерции сейчас не сохраняются; по статье dev для developer разрешена только as. Скрипт сохраняет api_offs_uuid / api_offs_processUuid / api_offs_code."
+							},
+							"response": []
+						},
+						{
+							"name": "offs 2 — Статус операции",
+							"id": "1a53b8e0-7f47-046d-31eb-5433c774ba2b",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/operations/{{api_offs_processUuid}}"
+							},
+							"response": []
+						},
+						{
+							"name": "offs 3 — Найти в списке по коду",
+							"id": "730134e3-39a3-cbaa-eacd-a138036beb85",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"where\": {\n    \"code\": {{api_offs_code}}\n  },\n  \"pagination\": {\n    \"page\": 1,\n    \"pageSize\": 1\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/search",
+								"description": "REALT-12039 №5: коммерческие объявления сейчас не попадают в список (totalCount 0)."
+							},
+							"response": []
+						},
+						{
+							"name": "offs 4 — Обновить (без фото)",
+							"id": "74d571f5-216c-4c79-c1dc-61a4629f9cdd",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"offs\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа офиса\",\n    \"headline\": \"Офис в бизнес-центре у метро, отделка под ключ, парковка и охрана\",\n    \"description\": \"Офис с отделкой, кондиционер, охрана, парковка.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 17,\n    \"objectTypeExtra\": [17],\n    \"areaTotal\": 120.5,\n    \"storey\": 3,\n    \"storeys\": 5,\n    \"repairState\": 2\n  },\n  \"termsOfSale\": {\n    \"price\": 140000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_offs_uuid}}",
+								"description": "REALT-12039 №2: update offs/pls/coms сейчас возвращает 404 «Не существует объявления»."
+							},
+							"response": []
+						},
+						{
+							"name": "offs 5 — Обновить с новыми фото",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"const j = pm.response.json();",
+											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+											"if (j.success && j.body && j.body.processUuid) pm.collectionVariables.set('api_offs_processUuid', j.body.processUuid);"
+										]
+									}
+								}
+							],
+							"id": "2f87c000-6dff-2deb-120f-3dc1c0f8cffa",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"offs\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа офиса\",\n    \"headline\": \"Офис в бизнес-центре у метро, отделка под ключ, парковка и охрана\",\n    \"description\": \"Офис с отделкой, кондиционер, охрана, парковка.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 17,\n    \"objectTypeExtra\": [17],\n    \"areaTotal\": 120.5,\n    \"storey\": 2,\n    \"storeys\": 5,\n    \"repairState\": 2\n  },\n  \"termsOfSale\": {\n    \"price\": 140000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  },\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&fm=jpg\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_offs_uuid}}"
+							},
+							"response": []
+						},
+						{
+							"name": "offs 6 — Обновить: снять все фото",
+							"id": "1356d289-d9a7-32e4-cf67-31359b52ef4b",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"offs\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа офиса\",\n    \"headline\": \"Офис в бизнес-центре у метро, отделка под ключ, парковка и охрана\",\n    \"description\": \"Офис с отделкой, кондиционер, охрана, парковка.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 17,\n    \"objectTypeExtra\": [17],\n    \"areaTotal\": 120.5,\n    \"storey\": 2,\n    \"storeys\": 5,\n    \"repairState\": 2\n  },\n  \"termsOfSale\": {\n    \"price\": 140000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  },\n  \"photoUrls\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_offs_uuid}}"
+							},
+							"response": []
+						},
+						{
+							"name": "offs 7 — Перенести в архив",
+							"id": "ec2e5a3a-c2c0-4ac0-ca1f-38cfdc0cf9a7",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"uuids\": [\n    \"{{api_offs_uuid}}\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/archive"
+							},
+							"response": []
+						},
+						{
+							"name": "offs 8 — Вернуть из архива",
+							"id": "2b1e8d88-5c24-add7-d7ba-1ec7f59afeaa",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"uuids\": [\n    \"{{api_offs_uuid}}\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/restore"
+							},
+							"response": []
+						},
+						{
+							"name": "offs 9 — Значения полей (shortcuts 20)",
+							"id": "dcedd75b-56d7-58b7-7b38-51d6dc01f790",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories/20/shortcuts",
+								"description": "Коды для offs: objectType/extraObjectType (офис 17, офис+склад 53, квартира+офис 36, коворкинг 40), repairState, equipment, nds, classes и др."
+							},
+							"response": []
+						}
+					],
 					"id": "22598a27-44c8-43bc-b9f9-992d420c1513"
+				},
+				{
+					"name": "4.4 coms - CommercialSale",
+					"item": [],
+					"id": "bda3d9d3-606c-4db2-b0fc-ed5deef09fd7"
 				},
 				{
 					"name": "1.1 Авторизация — Логин",
@@ -6696,11 +6978,6 @@
 				}
 			],
 			"id": "5ad6d578-7576-4697-9c2c-104a7a8e4d08"
-		},
-		{
-			"name": "4.4 coms - CommercialSale",
-			"item": [],
-			"id": "bda3d9d3-606c-4db2-b0fc-ed5deef09fd7"
 		}
 	],
 	"event": [
