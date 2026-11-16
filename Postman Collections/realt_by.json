@@ -6031,8 +6031,294 @@
 			"item": [
 				{
 					"name": "4.1 as - ApartmentSale",
-					"item": [],
+					"item": [
+						{
+							"name": "as 1 — Создать объявление",
+							"event": [
+								{
+									"script": {
+										"exec": [
+											"const j = pm.response.json();",
+											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+											"if (j.success) {",
+											"  pm.collectionVariables.set('api_as_uuid', j.body.uuid);",
+											"  pm.collectionVariables.set('api_as_processUuid', j.body.processUuid);",
+											"  pm.collectionVariables.set('api_as_code', j.body.code);",
+											"}"
+										],
+										"type": "text/javascript"
+									},
+									"listen": "test"
+								}
+							],
+							"id": "f5eb19d4-7196-cf49-2ea9-32a8910c1e21",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"as\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа 2-комнатной квартиры\",\n    \"headline\": \"Двухкомнатная квартира в новом доме у метро, свежий ремонт и парковка\",\n    \"description\": \"Свежий ремонт, окна во двор, рядом школа и парк.\"\n  },\n  \"ownerInfo\": {},\n  \"objectParams\": {\n    \"rooms\": 2,\n    \"storey\": 3,\n    \"storeys\": 9,\n    \"areaTotal\": 55.5,\n    \"areaLiving\": 30.2,\n    \"balconiesCount\": 1,\n    \"facilities\": [],\n    \"backyardImprovement\": [],\n    \"facilitiesForDisabledPeople\": []\n  },\n  \"buildingInfo\": {\n    \"buildingYear\": 2020\n  },\n  \"termsOfSale\": {\n    \"price\": 85000,\n    \"priceCurrency\": 840,\n    \"terms\": 1\n  },\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&fm=jpg\",\n    \"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&fm=jpg\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"description": "Продажа квартир (as, categoryId 5). Обязательные: category, photoUrls (min 1), buildingInfo, contactInfo, locationInfo, objectParams, ownerInfo, termsOfSale, textData. terms: 1 Чистая продажа, 2–4 обмен. Скрипт сохраняет api_as_uuid / api_as_processUuid / api_as_code."
+							},
+							"response": []
+						},
+						{
+							"name": "as 2 — Статус операции",
+							"id": "5d187e0c-21cf-5ee3-a73b-0ecc13fad304",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/operations/{{api_as_processUuid}}",
+								"description": "photoStatus pending/done/failed, objectStatus, failedUrls — для последней операции с фото (создание или обновление с фото)."
+							},
+							"response": []
+						},
+						{
+							"name": "as 3 — Найти в списке по коду",
+							"id": "b02b4367-8bd7-248b-4538-045b79c4eb12",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"where\": {\n    \"code\": {{api_as_code}}\n  },\n  \"pagination\": {\n    \"page\": 1,\n    \"pageSize\": 1\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/search",
+								"description": "Метода просмотра одного объявления нет — используем список с фильтром по code (работают фильтры code, uuids, archive). Данные в списке обновляются с задержкой ~30–40 с."
+							},
+							"response": []
+						},
+						{
+							"name": "as 4 — Обновить (без фото)",
+							"id": "10e237c6-ebe4-bd72-01c4-3d03ee27ee22",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"as\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа 2-комнатной квартиры\",\n    \"headline\": \"Двухкомнатная квартира в новом доме у метро, свежий ремонт и парковка\",\n    \"description\": \"Свежий ремонт, окна во двор, рядом школа и парк.\"\n  },\n  \"ownerInfo\": {},\n  \"objectParams\": {\n    \"rooms\": 2,\n    \"storey\": 4,\n    \"storeys\": 9,\n    \"areaTotal\": 55.5,\n    \"areaLiving\": 30.2,\n    \"balconiesCount\": 1,\n    \"loggiasCount\": 0,\n    \"facilities\": [],\n    \"backyardImprovement\": [],\n    \"facilitiesForDisabledPeople\": []\n  },\n  \"buildingInfo\": {\n    \"buildingYear\": 2020,\n    \"buildingCompletionPercentage\": 100\n  },\n  \"termsOfSale\": {\n    \"price\": 82000,\n    \"priceCurrency\": 840,\n    \"terms\": 1\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_as_uuid}}",
+								"description": "Без ключа photoUrls — фото не трогаются, синхронный update (processUuid = null). Ключевые поля (цена/валюта, title/headline/description) → повторная модерация; остальные — статус не меняется. Только для update as: buildingInfo.buildingCompletionPercentage (0–100), objectParams.loggiasCount (0–27)."
+							},
+							"response": []
+						},
+						{
+							"name": "as 5 — Обновить с новыми фото",
+							"event": [
+								{
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"const j = pm.response.json();",
+											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+											"if (j.success && j.body && j.body.processUuid) pm.collectionVariables.set('api_as_processUuid', j.body.processUuid);"
+										]
+									},
+									"listen": "test"
+								}
+							],
+							"id": "b82c21b7-d82d-5398-5de8-439320655bf3",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"as\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа 2-комнатной квартиры\",\n    \"headline\": \"Двухкомнатная квартира в новом доме у метро, свежий ремонт и парковка\",\n    \"description\": \"Свежий ремонт, окна во двор, рядом школа и парк.\"\n  },\n  \"ownerInfo\": {},\n  \"objectParams\": {\n    \"rooms\": 2,\n    \"storey\": 3,\n    \"storeys\": 9,\n    \"areaTotal\": 55.5,\n    \"areaLiving\": 30.2,\n    \"balconiesCount\": 1,\n    \"facilities\": [],\n    \"backyardImprovement\": [],\n    \"facilitiesForDisabledPeople\": []\n  },\n  \"buildingInfo\": {\n    \"buildingYear\": 2020\n  },\n  \"termsOfSale\": {\n    \"price\": 82000,\n    \"priceCurrency\": 840,\n    \"terms\": 1\n  },\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&fm=jpg\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_as_uuid}}",
+								"description": "Непустой photoUrls — асинхронная загрузка (processUuid), старые фото заменяются новыми. Пока операция идёт, повторный update → 409. Скрипт обновляет api_as_processUuid."
+							},
+							"response": []
+						},
+						{
+							"name": "as 6 — Обновить: снять все фото",
+							"id": "933bd2dd-ee00-81eb-3290-8461d5c6b3eb",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"as\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа 2-комнатной квартиры\",\n    \"headline\": \"Двухкомнатная квартира в новом доме у метро, свежий ремонт и парковка\",\n    \"description\": \"Свежий ремонт, окна во двор, рядом школа и парк.\"\n  },\n  \"ownerInfo\": {},\n  \"objectParams\": {\n    \"rooms\": 2,\n    \"storey\": 3,\n    \"storeys\": 9,\n    \"areaTotal\": 55.5,\n    \"areaLiving\": 30.2,\n    \"balconiesCount\": 1,\n    \"facilities\": [],\n    \"backyardImprovement\": [],\n    \"facilitiesForDisabledPeople\": []\n  },\n  \"buildingInfo\": {\n    \"buildingYear\": 2020\n  },\n  \"termsOfSale\": {\n    \"price\": 82000,\n    \"priceCurrency\": 840,\n    \"terms\": 1\n  },\n  \"photoUrls\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_as_uuid}}",
+								"description": "photoUrls: [] — снимает все фото объявления. По архитектуре на модерацию из-за этого не отправляет."
+							},
+							"response": []
+						},
+						{
+							"name": "as 7 — Перенести в архив",
+							"id": "502fe1e7-1979-9e4f-2545-f6aadeef75e6",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"uuids\": [\n    \"{{api_as_uuid}}\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/archive"
+							},
+							"response": []
+						},
+						{
+							"name": "as 8 — Вернуть из архива",
+							"id": "8bce2ac9-7c32-9af6-9464-ecbe4e04d789",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"uuids\": [\n    \"{{api_as_uuid}}\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/restore",
+								"description": "Баг REALT-12039 №3: после восстановления объявление становится черновиком (status 6)."
+							},
+							"response": []
+						},
+						{
+							"name": "as 9 — Значения полей (shortcuts 5)",
+							"id": "b29471fe-c957-9cde-f1e4-1ca5799c79c0",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories/5/shortcuts",
+								"description": "Коды значений полей для as: toilet, balconyType, repairState, houseType, terms и др."
+							},
+							"response": []
+						}
+					],
 					"id": "9119f266-3dbe-4d32-9db9-43bebe749bc0"
+				},
+				{
+					"name": "4.2 offs - OfficeSale",
+					"item": [],
+					"id": "22598a27-44c8-43bc-b9f9-992d420c1513"
 				},
 				{
 					"name": "1.1 Авторизация — Логин",
