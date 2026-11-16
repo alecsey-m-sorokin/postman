@@ -6030,6 +6030,11 @@
 			"name": "test_api",
 			"item": [
 				{
+					"name": "4.3 pls - PlacementSale",
+					"item": [],
+					"id": "7a146e74-8daa-4ac5-a089-6e102f2b3a4d"
+				},
+				{
 					"name": "4.1 as - ApartmentSale",
 					"item": [
 						{
@@ -6691,6 +6696,11 @@
 				}
 			],
 			"id": "5ad6d578-7576-4697-9c2c-104a7a8e4d08"
+		},
+		{
+			"name": "4.4 coms - CommercialSale",
+			"item": [],
+			"id": "bda3d9d3-606c-4db2-b0fc-ed5deef09fd7"
 		}
 	],
 	"event": [
