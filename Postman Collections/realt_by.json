@@ -7050,6 +7050,113 @@
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_coms_uuid}}"
 							},
 							"response": []
+						},
+						{
+							"name": "coms 6 — Обновить: снять все фото",
+							"id": "c626011d-2f7d-c62a-5a80-82a2b7ff18ee",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"coms\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа торгового помещения\",\n    \"headline\": \"Торговое помещение на первой линии, высокий трафик, витрины на проспект\",\n    \"description\": \"Торговое помещение с витринами, отдельный вход, разгрузочная зона.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 15,\n    \"objectTypeExtra\": [15],\n    \"areaTotal\": 140,\n    \"storey\": 1,\n    \"storeys\": 5,\n    \"repairState\": 2\n  },\n  \"termsOfSale\": {\n    \"price\": 200000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  },\n  \"photoUrls\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_coms_uuid}}"
+							},
+							"response": []
+						},
+						{
+							"name": "coms 7 — Перенести в архив",
+							"id": "75280265-09c9-2445-3303-b923fbfb1376",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"uuids\": [\n    \"{{api_coms_uuid}}\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/archive"
+							},
+							"response": []
+						},
+						{
+							"name": "coms 8 — Вернуть из архива",
+							"id": "c331d981-5bdc-5ba7-356f-672c9ed18104",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"uuids\": [\n    \"{{api_coms_uuid}}\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/restore"
+							},
+							"response": []
+						},
+						{
+							"name": "coms 9 — Значения полей (shortcuts 18)",
+							"id": "06794f2c-2bcd-f286-bff2-67de4b3297c6",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories/18/shortcuts",
+								"description": "Коды для coms: objectType (магазин 27, павильон 22, торговое место 31, торговый центр 33, торговое помещение 15, киоск 47, аптека 18, бутик 46, стрит ритэйл 34), repairState, equipment, nds и др."
+							},
+							"response": []
 						}
 					],
 					"id": "bda3d9d3-606c-4db2-b0fc-ed5deef09fd7"
