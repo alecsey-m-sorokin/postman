@@ -6484,6 +6484,18 @@
 		{
 			"key": "api_refreshToken",
 			"value": ""
+		},
+		{
+			"key": "api_uuid",
+			"value": ""
+		},
+		{
+			"key": "api_processUuid",
+			"value": ""
+		},
+		{
+			"key": "api_code",
+			"value": ""
 		}
 	]
 }
