@@ -6030,6 +6030,11 @@
 			"name": "test_api",
 			"item": [
 				{
+					"name": "4.1 as - ApartmentSale",
+					"item": [],
+					"id": "9119f266-3dbe-4d32-9db9-43bebe749bc0"
+				},
+				{
 					"name": "1.1 Авторизация — Логин",
 					"event": [
 						{
