@@ -6030,288 +6030,6 @@
 			"name": "test_api",
 			"item": [
 				{
-					"name": "4.3 pls - PlacementSale",
-					"item": [
-						{
-							"name": "pls 1 — Создать объявление",
-							"event": [
-								{
-									"script": {
-										"type": "text/javascript",
-										"exec": [
-											"const j = pm.response.json();",
-											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
-											"if (j.success) {",
-											"  pm.collectionVariables.set('api_pls_uuid', j.body.uuid);",
-											"  pm.collectionVariables.set('api_pls_processUuid', j.body.processUuid);",
-											"  pm.collectionVariables.set('api_pls_code', j.body.code);",
-											"}"
-										]
-									},
-									"listen": "test"
-								}
-							],
-							"id": "46242994-6302-6024-5fb2-5e6e03e28a32",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": {
-										"token": "{{api_token}}"
-									}
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"category\": \"pls\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа помещения\",\n    \"headline\": \"Свободное помещение на первом этаже, отдельный вход, витринные окна\",\n    \"description\": \"Помещение свободного назначения, отдельный вход, все коммуникации.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 21,\n    \"objectTypeExtra\": [21],\n    \"areaTotal\": 85,\n    \"storey\": 1,\n    \"storeys\": 9,\n    \"repairState\": 3\n  },\n  \"termsOfSale\": {\n    \"price\": 120000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  },\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&fm=jpg\"\n  ]\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
-								"description": "Продажа помещений (pls, categoryId 27). Обязательные: category, photoUrls (min 1), contactInfo, locationInfo, objectInfo, ownerInfo, termsOfSale, textData. objectType: здание 16, помещение 21 (shortcuts 27). terms = 9. Внимание (REALT-12039): цена и площадь у коммерции сейчас не сохраняются; update → 404. Скрипт сохраняет api_pls_uuid / api_pls_processUuid / api_pls_code."
-							},
-							"response": []
-						},
-						{
-							"name": "pls 2 — Статус операции",
-							"id": "dae651ec-05a4-bf19-d6a0-7fad35c3a3bd",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": {
-										"token": "{{api_token}}"
-									}
-								},
-								"method": "GET",
-								"header": [],
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/operations/{{api_pls_processUuid}}"
-							},
-							"response": []
-						},
-						{
-							"name": "pls 3 — Найти в списке по коду",
-							"id": "f3819f92-44d2-d2ed-8996-43f3bac32fad",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": {
-										"token": "{{api_token}}"
-									}
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"where\": {\n    \"code\": {{api_pls_code}}\n  },\n  \"pagination\": {\n    \"page\": 1,\n    \"pageSize\": 1\n  }\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/search",
-								"description": "REALT-12039 №5: коммерческие объявления сейчас не попадают в список."
-							},
-							"response": []
-						},
-						{
-							"name": "pls 4 — Обновить (без фото)",
-							"id": "ca6a6621-b050-5355-411c-504ad9f59b22",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": {
-										"token": "{{api_token}}"
-									}
-								},
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"category\": \"pls\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа помещения\",\n    \"headline\": \"Свободное помещение на первом этаже, отдельный вход, витринные окна\",\n    \"description\": \"Помещение свободного назначения, отдельный вход, все коммуникации.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 21,\n    \"objectTypeExtra\": [21],\n    \"areaTotal\": 85,\n    \"storey\": 1,\n    \"storeys\": 9,\n    \"repairState\": 2\n  },\n  \"termsOfSale\": {\n    \"price\": 115000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  }\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}",
-								"description": "REALT-12039 №2: update offs/pls/coms сейчас возвращает 404."
-							},
-							"response": []
-						},
-						{
-							"name": "pls 5 — Обновить с новыми фото",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"const j = pm.response.json();",
-											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
-											"if (j.success && j.body && j.body.processUuid) pm.collectionVariables.set('api_pls_processUuid', j.body.processUuid);"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"id": "6534fdff-9cbe-b186-1058-fe692e6ba2b2",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": {
-										"token": "{{api_token}}"
-									}
-								},
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"category\": \"pls\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа помещения\",\n    \"headline\": \"Свободное помещение на первом этаже, отдельный вход, витринные окна\",\n    \"description\": \"Помещение свободного назначения, отдельный вход, все коммуникации.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 21,\n    \"objectTypeExtra\": [21],\n    \"areaTotal\": 85,\n    \"storey\": 1,\n    \"storeys\": 9,\n    \"repairState\": 3\n  },\n  \"termsOfSale\": {\n    \"price\": 115000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  },\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&fm=jpg\"\n  ]\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}"
-							},
-							"response": []
-						},
-						{
-							"name": "pls 6 — Обновить: снять все фото",
-							"id": "db866858-9298-8628-b736-12a4e40ee836",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": {
-										"token": "{{api_token}}"
-									}
-								},
-								"method": "PUT",
-								"header": [
-									{
-										"value": "application/json",
-										"key": "Content-Type"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"category\": \"pls\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа помещения\",\n    \"headline\": \"Свободное помещение на первом этаже, отдельный вход, витринные окна\",\n    \"description\": \"Помещение свободного назначения, отдельный вход, все коммуникации.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 21,\n    \"objectTypeExtra\": [21],\n    \"areaTotal\": 85,\n    \"storey\": 1,\n    \"storeys\": 9,\n    \"repairState\": 3\n  },\n  \"termsOfSale\": {\n    \"price\": 115000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  },\n  \"photoUrls\": []\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}"
-							},
-							"response": []
-						},
-						{
-							"name": "pls 7 — Перенести в архив",
-							"id": "4d910f01-d8e2-0652-25af-82a73dbe2a89",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": {
-										"token": "{{api_token}}"
-									}
-								},
-								"method": "POST",
-								"header": [
-									{
-										"value": "application/json",
-										"key": "Content-Type"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"uuids\": [\n    \"{{api_pls_uuid}}\"\n  ]\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/archive"
-							},
-							"response": []
-						},
-						{
-							"name": "pls 8 — Вернуть из архива",
-							"id": "81dd32b8-ad1b-9dcf-4314-181468ee699f",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": {
-										"token": "{{api_token}}"
-									}
-								},
-								"method": "POST",
-								"header": [
-									{
-										"value": "application/json",
-										"key": "Content-Type"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"uuids\": [\n    \"{{api_pls_uuid}}\"\n  ]\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/restore"
-							},
-							"response": []
-						},
-						{
-							"name": "pls 9 — Значения полей (shortcuts 27)",
-							"id": "604aa35e-eef3-b0ed-3612-a03712b58e58",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": {
-										"token": "{{api_token}}"
-									}
-								},
-								"method": "GET",
-								"header": [],
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories/27/shortcuts",
-								"description": "Коды для pls: objectType (здание 16, помещение 21), separateEnter, classes, place, repairState, equipment, nds и др."
-							},
-							"response": []
-						}
-					],
-					"id": "7a146e74-8daa-4ac5-a089-6e102f2b3a4d"
-				},
-				{
 					"name": "4.1 as - ApartmentSale",
 					"item": [
 						{
@@ -6591,6 +6309,97 @@
 								"header": [],
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories/5/shortcuts",
 								"description": "Коды значений полей для as: toilet, balconyType, repairState, houseType, terms и др."
+							},
+							"response": []
+						},
+						{
+							"name": "as 10 — Создать: все поля (shortcuts 5)",
+							"event": [
+								{
+									"script": {
+										"exec": [
+											"const j = pm.response.json();",
+											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+											"if (j.success) {",
+											"  pm.collectionVariables.set('api_as_uuid', j.body.uuid);",
+											"  pm.collectionVariables.set('api_as_processUuid', j.body.processUuid);",
+											"  pm.collectionVariables.set('api_as_code', j.body.code);",
+											"}"
+										],
+										"type": "text/javascript"
+									},
+									"listen": "test"
+								}
+							],
+							"id": "3bc06291-c563-07a8-4a08-22a3a946937b",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"as\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1,\n    \"townType\": 1,\n    \"metroTimeType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"QA Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA SC as все поля\",\n    \"headline\": \"Двухкомнатная квартира в новом доме у метро, свежий ремонт и парковка\",\n    \"description\": \"QA тест Public API REALT-11413, все поля из shortcuts.\"\n  },\n  \"ownerInfo\": {\n    \"owner\": 5,\n    \"seller\": 2\n  },\n  \"objectParams\": {\n    \"rooms\": 2,\n    \"storey\": 3,\n    \"storeys\": 9,\n    \"areaTotal\": 55.5,\n    \"areaLiving\": 30.2,\n    \"balconiesCount\": 1,\n    \"facilities\": [],\n    \"backyardImprovement\": [],\n    \"facilitiesForDisabledPeople\": [],\n    \"repairState\": 3,\n    \"furniture\": [1],\n    \"toilet\": 1,\n    \"balconyType\": 2,\n    \"phone\": 1,\n    \"storeyType\": 0,\n    \"parkingPlace\": 1\n  },\n  \"buildingInfo\": {\n    \"buildingYear\": 2020,\n    \"houseType\": 3\n  },\n  \"termsOfSale\": {\n    \"price\": 91000,\n    \"priceCurrency\": 840,\n    \"terms\": 1\n  },\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&fm=jpg\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"description": "Квартира (as, 5): заполнены все поля из GET /advertisements/categories/5/shortcuts.\n\nКоды → значения словаря:\n- locationInfo.townType 1 = город; locationInfo.metroTimeType 1 = Пешком\n- ownerInfo.owner 5 = частная; ownerInfo.seller 2 = Хозяин\n- objectParams.repairState 3 = нормальный; furniture [1] = есть (схема требует массив); toilet 1 = Совмещенный; balconyType 2 = Лоджия; phone 1 = есть; storeyType 0 = первый-высокий; parkingPlace 1 = есть\n- buildingInfo.houseType 3 = Монолитный\n- termsOfSale.terms 1 = Чистая продажа\n\nПрогон 17.11.2026 (объявление 2587875): сохраняются repairState, houseType, owner, terms, townType. Теряются без ошибки: toilet, phone, storeyType, seller, metroTimeType (схема их не знает); furniture → 0, parkingPlace → 0, balconyType → 27 (Есть).\nСкрипт сохраняет api_as_uuid / api_as_processUuid / api_as_code — после него работают as 2, 3, 7, 8, 11."
+							},
+							"response": []
+						},
+						{
+							"name": "as 11 — Обновить: все поля, другие коды (shortcuts 5)",
+							"event": [
+								{
+									"script": {
+										"exec": [
+											"const j = pm.response.json();",
+											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));"
+										],
+										"type": "text/javascript"
+									},
+									"listen": "test"
+								}
+							],
+							"id": "656798be-3bc2-330a-4051-5dbd8523e50c",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"as\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1,\n    \"townType\": 1,\n    \"metroTimeType\": 2\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"QA Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA SC as все поля (upd)\",\n    \"headline\": \"Двухкомнатная квартира в новом доме у метро, свежий ремонт и парковка\",\n    \"description\": \"QA тест Public API REALT-11413, все поля из shortcuts, update.\"\n  },\n  \"ownerInfo\": {\n    \"owner\": 4,\n    \"seller\": 1\n  },\n  \"objectParams\": {\n    \"rooms\": 2,\n    \"storey\": 3,\n    \"storeys\": 9,\n    \"areaTotal\": 55.5,\n    \"areaLiving\": 30.2,\n    \"balconiesCount\": 1,\n    \"facilities\": [],\n    \"backyardImprovement\": [],\n    \"facilitiesForDisabledPeople\": [],\n    \"repairState\": 8,\n    \"furniture\": [0],\n    \"toilet\": 2,\n    \"balconyType\": 27,\n    \"phone\": 3,\n    \"storeyType\": 2,\n    \"parkingPlace\": 0\n  },\n  \"buildingInfo\": {\n    \"buildingYear\": 2020,\n    \"houseType\": 11\n  },\n  \"termsOfSale\": {\n    \"price\": 93000,\n    \"priceCurrency\": 840,\n    \"terms\": 2\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_as_uuid}}",
+								"description": "Обновление объявления из as 10 (uuid из api_as_uuid), photoUrls не передаётся — фото остаются. Все коды отличаются от as 10:\n- metroTimeType 2 = На транспорте; owner 4 = долевое строительство; seller 1 = Эксклюзив\n- repairState 8 = строительная отделка; furniture [0] = нет; toilet 2 = 2 и более; balconyType 27 = Есть; phone 3 = 2 телефона; storeyType 2 = технический этаж; parkingPlace 0 = нет\n- houseType 11 = Каркасно-блочный; terms 2 = Обмен\n\nПрогон 17.11.2026 (2587875): применились title, price, repairState, houseType, owner, terms, balconyType (на карточке «балкон»). toilet, phone, storeyType, seller, metroTimeType по-прежнему не сохраняются."
 							},
 							"response": []
 						}
@@ -6875,9 +6684,382 @@
 								"description": "Коды для offs: objectType/extraObjectType (офис 17, офис+склад 53, квартира+офис 36, коворкинг 40), repairState, equipment, nds, classes и др."
 							},
 							"response": []
+						},
+						{
+							"name": "offs 10 — Создать: все поля (shortcuts 20)",
+							"event": [
+								{
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"const j = pm.response.json();",
+											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+											"if (j.success) {",
+											"  pm.collectionVariables.set('api_offs_uuid', j.body.uuid);",
+											"  pm.collectionVariables.set('api_offs_processUuid', j.body.processUuid);",
+											"  pm.collectionVariables.set('api_offs_code', j.body.code);",
+											"}"
+										]
+									},
+									"listen": "test"
+								}
+							],
+							"id": "b8b5396c-0a5e-5a76-65b1-cdcccb3dc387",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"offs\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1,\n    \"townType\": 1,\n    \"metroTimeType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"QA Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA SC offs все поля\",\n    \"headline\": \"Коммерческое помещение в бизнес-центре у метро, отделка под ключ, парковка\",\n    \"description\": \"QA тест Public API REALT-11413, offs, все поля из shortcuts.\"\n  },\n  \"ownerInfo\": {\n    \"owner\": 5,\n    \"seller\": 2\n  },\n  \"objectInfo\": {\n    \"objectType\": 53,\n    \"objectTypeExtra\": [53, 17],\n    \"extraObjectType\": [53, 17],\n    \"areaTotal\": 120.5,\n    \"storey\": 2,\n    \"storeys\": 5,\n    \"repairState\": 3,\n    \"equipment\": 514,\n    \"daylight\": 1,\n    \"electricity\": 4,\n    \"sewer\": 5,\n    \"phones\": 3,\n    \"legalAddress\": 1,\n    \"place\": [301],\n    \"classes\": 101\n  },\n  \"termsOfSale\": {\n    \"price\": 150000,\n    \"priceCurrency\": 840,\n    \"terms\": 9,\n    \"nds\": 1\n  },\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&fm=jpg\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"description": "Офис (offs, 20): заполнены все поля из GET /advertisements/categories/20/shortcuts.\n\nКоды → значения словаря:\n- townType 1 = город; metroTimeType 1 = Пешком; owner 5 = частная; seller 2 = Хозяин\n- objectType 53 = офис+склад; objectTypeExtra / extraObjectType [53, 17] = офис+склад, офис (в shortcuts ключ extraObjectType, в схеме init — objectTypeExtra)\n- repairState 3 = нормальный; equipment 514 = кондиционер (схема принимает одно число, хотя это мультивыбор); daylight 1 = есть; electricity 4 = 380В; sewer 5 = 2 санузла; phones 3 = 2 телефона; legalAddress 1 = есть; place [301] = в бизнес центре (схема требует массив); classes 101 = A\n- terms 9 = Продажа; nds 1 = НДС включен\n\nПрогон 17.11.2026 (2587876): на карточке и в ЛК есть objectType, objectTypeExtra, repairState, daylight, electricity, sewer, phones, legalAddress, place, nds. equipment хранится (514), но на карточке пусто и в ЛК «Кондиционер» выключен. Теряются без ошибки: classes, owner, seller, metroTimeType, terms. Цена и площадь не сохраняются (баг №4 REALT-12039).\nСкрипт сохраняет api_offs_uuid / api_offs_processUuid / api_offs_code."
+							},
+							"response": []
+						},
+						{
+							"name": "offs 11 — Обновить: все поля, другие коды (shortcuts 20)",
+							"event": [
+								{
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"const j = pm.response.json();",
+											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));"
+										]
+									},
+									"listen": "test"
+								}
+							],
+							"id": "16f89ecb-d087-4a3b-8ef7-ce58358ea2f3",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"offs\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1,\n    \"townType\": 1,\n    \"metroTimeType\": 2\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"QA Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA SC offs все поля (upd)\",\n    \"headline\": \"Коммерческое помещение в бизнес-центре у метро, отделка под ключ, парковка\",\n    \"description\": \"QA тест Public API REALT-11413, offs, все поля из shortcuts, update.\"\n  },\n  \"ownerInfo\": {\n    \"owner\": 1,\n    \"seller\": 1\n  },\n  \"objectInfo\": {\n    \"objectType\": 36,\n    \"objectTypeExtra\": [36, 40],\n    \"extraObjectType\": [36, 40],\n    \"areaTotal\": 99.9,\n    \"storey\": 2,\n    \"storeys\": 5,\n    \"repairState\": 8,\n    \"equipment\": 703,\n    \"daylight\": 0,\n    \"electricity\": 3,\n    \"sewer\": 1,\n    \"phones\": 6,\n    \"legalAddress\": 0,\n    \"place\": [305],\n    \"classes\": 103\n  },\n  \"termsOfSale\": {\n    \"price\": 140000,\n    \"priceCurrency\": 840,\n    \"terms\": 9,\n    \"nds\": 2\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_offs_uuid}}",
+								"description": "Обновление офиса из offs 10 (api_offs_uuid). Коды отличаются: objectType 36 = квартира+офис; objectTypeExtra [36, 40] = квартира+офис, коворкинг; repairState 8 = строительная отделка; equipment 703 = охрана; daylight 0 = нет; electricity 3 = 220В; sewer 1 = есть; phones 6 = 5 телефонов; legalAddress 0 = нет; place [305] = в жилом доме; classes 103 = C; owner 1 = государственная; seller 1 = Эксклюзив; nds 2 = НДС не включен; metroTimeType 2 = На транспорте.\n\nПрогон 17.11.2026 (2587876): «Не существует объявления с uuid=…» (404) — update коммерции не работает, баг №2 REALT-12039. После исправления проверить, что все коды применились."
+							},
+							"response": []
 						}
 					],
 					"id": "22598a27-44c8-43bc-b9f9-992d420c1513"
+				},
+				{
+					"name": "4.3 pls - PlacementSale",
+					"item": [
+						{
+							"name": "pls 1 — Создать объявление",
+							"event": [
+								{
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"const j = pm.response.json();",
+											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+											"if (j.success) {",
+											"  pm.collectionVariables.set('api_pls_uuid', j.body.uuid);",
+											"  pm.collectionVariables.set('api_pls_processUuid', j.body.processUuid);",
+											"  pm.collectionVariables.set('api_pls_code', j.body.code);",
+											"}"
+										]
+									},
+									"listen": "test"
+								}
+							],
+							"id": "46242994-6302-6024-5fb2-5e6e03e28a32",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"pls\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа помещения\",\n    \"headline\": \"Свободное помещение на первом этаже, отдельный вход, витринные окна\",\n    \"description\": \"Помещение свободного назначения, отдельный вход, все коммуникации.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 21,\n    \"objectTypeExtra\": [21],\n    \"areaTotal\": 85,\n    \"storey\": 1,\n    \"storeys\": 9,\n    \"repairState\": 3\n  },\n  \"termsOfSale\": {\n    \"price\": 120000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  },\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&fm=jpg\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"description": "Продажа помещений (pls, categoryId 27). Обязательные: category, photoUrls (min 1), contactInfo, locationInfo, objectInfo, ownerInfo, termsOfSale, textData. objectType: здание 16, помещение 21 (shortcuts 27). terms = 9. Внимание (REALT-12039): цена и площадь у коммерции сейчас не сохраняются; update → 404. Скрипт сохраняет api_pls_uuid / api_pls_processUuid / api_pls_code."
+							},
+							"response": []
+						},
+						{
+							"name": "pls 2 — Статус операции",
+							"id": "dae651ec-05a4-bf19-d6a0-7fad35c3a3bd",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/operations/{{api_pls_processUuid}}"
+							},
+							"response": []
+						},
+						{
+							"name": "pls 3 — Найти в списке по коду",
+							"id": "f3819f92-44d2-d2ed-8996-43f3bac32fad",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"where\": {\n    \"code\": {{api_pls_code}}\n  },\n  \"pagination\": {\n    \"page\": 1,\n    \"pageSize\": 1\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/search",
+								"description": "REALT-12039 №5: коммерческие объявления сейчас не попадают в список."
+							},
+							"response": []
+						},
+						{
+							"name": "pls 4 — Обновить (без фото)",
+							"id": "ca6a6621-b050-5355-411c-504ad9f59b22",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"pls\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа помещения\",\n    \"headline\": \"Свободное помещение на первом этаже, отдельный вход, витринные окна\",\n    \"description\": \"Помещение свободного назначения, отдельный вход, все коммуникации.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 21,\n    \"objectTypeExtra\": [21],\n    \"areaTotal\": 85,\n    \"storey\": 1,\n    \"storeys\": 9,\n    \"repairState\": 2\n  },\n  \"termsOfSale\": {\n    \"price\": 115000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}",
+								"description": "REALT-12039 №2: update offs/pls/coms сейчас возвращает 404."
+							},
+							"response": []
+						},
+						{
+							"name": "pls 5 — Обновить с новыми фото",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const j = pm.response.json();",
+											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+											"if (j.success && j.body && j.body.processUuid) pm.collectionVariables.set('api_pls_processUuid', j.body.processUuid);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "6534fdff-9cbe-b186-1058-fe692e6ba2b2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"pls\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа помещения\",\n    \"headline\": \"Свободное помещение на первом этаже, отдельный вход, витринные окна\",\n    \"description\": \"Помещение свободного назначения, отдельный вход, все коммуникации.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 21,\n    \"objectTypeExtra\": [21],\n    \"areaTotal\": 85,\n    \"storey\": 1,\n    \"storeys\": 9,\n    \"repairState\": 3\n  },\n  \"termsOfSale\": {\n    \"price\": 115000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  },\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&fm=jpg\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}"
+							},
+							"response": []
+						},
+						{
+							"name": "pls 6 — Обновить: снять все фото",
+							"id": "db866858-9298-8628-b736-12a4e40ee836",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"pls\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа помещения\",\n    \"headline\": \"Свободное помещение на первом этаже, отдельный вход, витринные окна\",\n    \"description\": \"Помещение свободного назначения, отдельный вход, все коммуникации.\"\n  },\n  \"ownerInfo\": {},\n  \"objectInfo\": {\n    \"objectType\": 21,\n    \"objectTypeExtra\": [21],\n    \"areaTotal\": 85,\n    \"storey\": 1,\n    \"storeys\": 9,\n    \"repairState\": 3\n  },\n  \"termsOfSale\": {\n    \"price\": 115000,\n    \"priceCurrency\": 840,\n    \"terms\": 9\n  },\n  \"photoUrls\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}"
+							},
+							"response": []
+						},
+						{
+							"name": "pls 7 — Перенести в архив",
+							"id": "4d910f01-d8e2-0652-25af-82a73dbe2a89",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"uuids\": [\n    \"{{api_pls_uuid}}\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/archive"
+							},
+							"response": []
+						},
+						{
+							"name": "pls 8 — Вернуть из архива",
+							"id": "81dd32b8-ad1b-9dcf-4314-181468ee699f",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"uuids\": [\n    \"{{api_pls_uuid}}\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/restore"
+							},
+							"response": []
+						},
+						{
+							"name": "pls 9 — Значения полей (shortcuts 27)",
+							"id": "604aa35e-eef3-b0ed-3612-a03712b58e58",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories/27/shortcuts",
+								"description": "Коды для pls: objectType (здание 16, помещение 21), separateEnter, classes, place, repairState, equipment, nds и др."
+							},
+							"response": []
+						}
+					],
+					"id": "7a146e74-8daa-4ac5-a089-6e102f2b3a4d"
 				},
 				{
 					"name": "4.4 coms - CommercialSale",
