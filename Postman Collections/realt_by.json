@@ -6363,54 +6363,6 @@
 							"response": []
 						},
 						{
-							"name": "as 1 — Создать объявление Copy",
-							"event": [
-								{
-									"script": {
-										"exec": [
-											"const j = pm.response.json();",
-											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
-											"if (j.success) {",
-											"  pm.collectionVariables.set('api_as_uuid', j.body.uuid);",
-											"  pm.collectionVariables.set('api_as_processUuid', j.body.processUuid);",
-											"  pm.collectionVariables.set('api_as_code', j.body.code);",
-											"}"
-										],
-										"type": "text/javascript"
-									},
-									"listen": "test"
-								}
-							],
-							"id": "5197ef6f-a808-4e50-985e-f4fae5e8b42c",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": {
-										"token": "{{api_token}}"
-									}
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"category\": \"as\",\n  \"locationInfo\": {\n    \"townName\": \"Минск\",\n    \"streetName\": \"проспект Независимости\",\n    \"houseNumber\": 4,\n    \"positionX\": 27.5615,\n    \"positionY\": 53.9006,\n    \"positionType\": 1\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\"],\n    \"contactName\": \"Отдел продаж\"\n  },\n  \"textData\": {\n    \"title\": \"QA API Продажа 2-комнатной квартиры\",\n    \"headline\": \"Двухкомнатная квартира в новом доме у метро, свежий ремонт и парковка\",\n    \"description\": \"Свежий ремонт, окна во двор, рядом школа и парк.\"\n  },\n  \"ownerInfo\": {},\n  \"objectParams\": {\n    \"rooms\": 2,\n    \"storey\": 3,\n    \"storeys\": 9,\n    \"areaTotal\": 55.5,\n    \"areaLiving\": 30.2,\n    \"balconiesCount\": 1,\n    \"facilities\": [],\n    \"backyardImprovement\": [],\n    \"facilitiesForDisabledPeople\": []\n  },\n  \"buildingInfo\": {\n    \"buildingYear\": 2020\n  },\n  \"termsOfSale\": {\n    \"price\": 85000,\n    \"priceCurrency\": 840,\n    \"terms\": 1\n  },\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&fm=jpg\",\n    \"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&fm=jpg\"\n  ]\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
-								"description": "Продажа квартир (as, categoryId 5). Обязательные: category, photoUrls (min 1), buildingInfo, contactInfo, locationInfo, objectParams, ownerInfo, termsOfSale, textData. terms: 1 Чистая продажа, 2–4 обмен. Скрипт сохраняет api_as_uuid / api_as_processUuid / api_as_code."
-							},
-							"response": []
-						},
-						{
 							"name": "as 2 — Статус операции",
 							"id": "5d187e0c-21cf-5ee3-a73b-0ecc13fad304",
 							"request": {
