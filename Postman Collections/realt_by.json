@@ -6402,6 +6402,97 @@
 								"description": "Обновление объявления из as 10 (uuid из api_as_uuid), photoUrls не передаётся — фото остаются. Все коды отличаются от as 10:\n- metroTimeType 2 = На транспорте; owner 4 = долевое строительство; seller 1 = Эксклюзив\n- repairState 8 = строительная отделка; furniture [0] = нет; toilet 2 = 2 и более; balconyType 27 = Есть; phone 3 = 2 телефона; storeyType 2 = технический этаж; parkingPlace 0 = нет\n- houseType 11 = Каркасно-блочный; terms 2 = Обмен\n\nПрогон 17.11.2026 (2587875): применились title, price, repairState, houseType, owner, terms, balconyType (на карточке «балкон»). toilet, phone, storeyType, seller, metroTimeType по-прежнему не сохраняются."
 							},
 							"response": []
+						},
+						{
+							"name": "as 13 — Создать: полное гео, метро и все поля (по документации)",
+							"event": [
+								{
+									"script": {
+										"exec": [
+											"const j = pm.response.json();",
+											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));",
+											"if (j.success) {",
+											"  pm.collectionVariables.set('api_as_uuid', j.body.uuid);",
+											"  pm.collectionVariables.set('api_as_processUuid', j.body.processUuid);",
+											"  pm.collectionVariables.set('api_as_code', j.body.code);",
+											"}"
+										],
+										"type": "text/javascript"
+									},
+									"listen": "test"
+								}
+							],
+							"id": "9ed7691f-165a-ed53-f5c0-5b50cdfad8de",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"value": "application/json",
+										"key": "Content-Type"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"as\",\n  \"locationInfo\": {\n    \"stateRegionUuid\": \"499f06b8-7b00-11eb-8943-0cc47adabd66\",\n    \"stateRegionName\": \"Минская область\",\n    \"stateDistrictUuid\": \"495ebec0-7b00-11eb-8943-0cc47adabd66\",\n    \"stateDistrictName\": \"Минский\",\n    \"townUuid\": \"4cb07174-7b00-11eb-8943-0cc47adabd66\",\n    \"townName\": \"Минск\",\n    \"townType\": 1,\n    \"townCat\": 1,\n    \"townDistrictUuid\": \"4daa4f46-7b00-11eb-8943-0cc47adabd66\",\n    \"townDistrictName\": \"Первомайский район\",\n    \"townSubDistrictUuid\": \"4decc577-7b00-11eb-8943-0cc47adabd66\",\n    \"townSubDistrictName\": \"Макаенка\",\n    \"streetUuid\": \"4a296f0b-7b00-11eb-8943-0cc47adabd66\",\n    \"streetName\": \"Независимости просп.\",\n    \"houseNumber\": 4,\n    \"buildingNumber\": \"1\",\n    \"flatNumber\": \"45\",\n    \"inventoryNumber\": \"500/D-654321\",\n    \"positionX\": 27.5471,\n    \"positionY\": 53.8938,\n    \"positionType\": 1,\n    \"nearestMetroStations\": [\n      {\"metroStationUuid\": \"481ca4ae-7b00-11eb-8943-0cc47adabd66\", \"metroStationName\": \"Площадь Ленина\", \"metroLineUuid\": \"47dd4893-7b00-11eb-8943-0cc47adabd66\", \"metroLineId\": 1, \"metroTime\": 5, \"metroTimeType\": 1},\n      {\"metroStationUuid\": \"481cc404-7b00-11eb-8943-0cc47adabd66\", \"metroStationName\": \"Площадь Богушевича\", \"metroLineUuid\": \"47dd4e82-7b00-11eb-8943-0cc47adabd66\", \"metroLineId\": 3, \"metroTime\": 12, \"metroTimeType\": 1},\n      {\"metroStationUuid\": \"481c9f9e-7b00-11eb-8943-0cc47adabd66\", \"metroStationName\": \"Институт культуры\", \"metroLineUuid\": \"47dd4893-7b00-11eb-8943-0cc47adabd66\", \"metroLineId\": 1, \"metroTime\": 7, \"metroTimeType\": 2}\n    ]\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\", \"+375447654321\"],\n    \"contactName\": \"QA Отдел продаж\",\n    \"shortContactPhone\": 7777,\n    \"email\": \"qa-sales@example.com\",\n    \"webSite\": \"https://example.com\",\n    \"communicationMethod\": 1,\n    \"legalStatus\": 1,\n    \"unp\": \"123456789\"\n  },\n  \"textData\": {\n    \"title\": \"QA API 2-комнатная квартира у метро Площадь Ленина\",\n    \"headline\": \"Двухкомнатная квартира 55 м² в новом монолитном доме у метро Площадь Ленина, евроремонт, парковка\",\n    \"description\": \"QA тест Public API REALT-11413: квартира со всеми описанными полями, полным гео и тремя станциями метро.\"\n  },\n  \"ownerInfo\": {\"owner\": 5, \"ownerType\": 7, \"ownerName\": \"ООО QA Тест\", \"ownerUnp\": 123456789},\n  \"objectParams\": {\n    \"rooms\": 2,\n    \"separateRooms\": 2,\n    \"roomsByPassport\": 2,\n    \"storey\": 5,\n    \"storeys\": 12,\n    \"levels\": 1,\n    \"areaTotal\": 55.5,\n    \"areaLiving\": 30.2,\n    \"areaKitchen\": 10.1,\n    \"areaBalcony\": 3.5,\n    \"areaSnb\": 57,\n    \"ceilingHeight\": 2.8,\n    \"balconiesCount\": 1,\n    \"lavatoriesCount\": 0,\n    \"layout\": 8,\n    \"repairState\": 0,\n    \"facilities\": [606, 607, 622, 637, 639, 640, 641],\n    \"backyardImprovement\": [1, 2, 3, 4],\n    \"facilitiesForDisabledPeople\": [1, 2, 4],\n    \"furniture\": [1],\n    \"view\": [2, 4]\n  },\n  \"buildingInfo\": {\n    \"buildingYear\": 2020,\n    \"houseType\": 3,\n    \"maintenance\": 1,\n    \"isNewBuild\": true,\n    \"notComplete\": false,\n    \"repairYear\": 2023,\n    \"parking\": [2, 5, 7]\n  },\n  \"termsOfSale\": {\"price\": 95000, \"priceCurrency\": 840, \"priceHaggle\": 1, \"terms\": 1, \"termsExtra\": [903]},\n  \"mlsData\": {\"commissionValue\": 2, \"commissionUnits\": 2, \"purchase\": \"QA условия покупки\", \"comments\": \"QA комментарий для партнёров\"},\n  \"statuses\": {\"web\": [1]},\n  \"photoUrls\": [\n    \"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&fm=jpg\",\n    \"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&fm=jpg\",\n    \"https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&fm=jpg\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"description": "Квартира со всеми полями из документации init (17.11.2026) и полным гео.\n\nГео взято из POST /v1/geo/search: город (types [3], townName = shortTitle «Минск»), улица (types [6] + townUuids) — из записи улицы берутся район города и микрорайон. Метро — массив nearestMetroStations; metroLineUuid в geo/search не отдаётся, взят из объявления сайта (1 Московская 47dd4893…, 3 Зеленолужская 47dd4e82…).\n\nОграничения бизнес-валидации: areaSnb ≥ areaTotal и не сильно больше (60 при 55,5 → «Указана слишком большая площадь по СНБ!»).\n\nПроверено 17.11 (2587923): создаётся, после модерации «Активно — размещено», на карточке все поля, гео и 3 станции. В ЛК есть. В листинге /sale/flats/ не появилось.\nСкрипт сохраняет api_as_uuid / api_as_processUuid / api_as_code."
+							},
+							"response": []
+						},
+						{
+							"name": "as 14 — Обновить: полное гео, метро и все поля (другие значения)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const j = pm.response.json();",
+											"pm.test('success = true', () => pm.expect(j.success).to.eql(true));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "f8af8a9c-fdc8-f15e-45f3-65ecaa873683",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{api_token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"as\",\n  \"locationInfo\": {\n    \"stateRegionUuid\": \"499f06b8-7b00-11eb-8943-0cc47adabd66\",\n    \"stateRegionName\": \"Минская область\",\n    \"stateDistrictUuid\": \"495ebec0-7b00-11eb-8943-0cc47adabd66\",\n    \"stateDistrictName\": \"Минский\",\n    \"townUuid\": \"4cb07174-7b00-11eb-8943-0cc47adabd66\",\n    \"townName\": \"Минск\",\n    \"townType\": 1,\n    \"townCat\": 1,\n    \"townDistrictUuid\": \"4daa4f46-7b00-11eb-8943-0cc47adabd66\",\n    \"townDistrictName\": \"Первомайский район\",\n    \"townSubDistrictUuid\": \"4decc577-7b00-11eb-8943-0cc47adabd66\",\n    \"townSubDistrictName\": \"Макаенка\",\n    \"streetUuid\": \"4a296f0b-7b00-11eb-8943-0cc47adabd66\",\n    \"streetName\": \"Независимости просп.\",\n    \"houseNumber\": 4,\n    \"buildingNumber\": \"1\",\n    \"flatNumber\": \"45\",\n    \"inventoryNumber\": \"500/D-654321\",\n    \"positionX\": 27.5471,\n    \"positionY\": 53.8938,\n    \"positionType\": 1,\n    \"nearestMetroStations\": [\n      {\"metroStationUuid\": \"481ca4ae-7b00-11eb-8943-0cc47adabd66\", \"metroStationName\": \"Площадь Ленина\", \"metroLineUuid\": \"47dd4893-7b00-11eb-8943-0cc47adabd66\", \"metroLineId\": 1, \"metroTime\": 3, \"metroTimeType\": 1}\n    ]\n  },\n  \"contactInfo\": {\n    \"contactPhones\": [\"+375291234567\", \"+375447654321\"],\n    \"contactName\": \"QA Отдел продаж\",\n    \"shortContactPhone\": 7777,\n    \"email\": \"qa-sales@example.com\",\n    \"webSite\": \"https://example.com\",\n    \"communicationMethod\": 1,\n    \"legalStatus\": 1,\n    \"unp\": \"123456789\"\n  },\n  \"textData\": {\n    \"title\": \"QA API 2-комнатная квартира у метро Площадь Ленина (upd)\",\n    \"headline\": \"Двухкомнатная квартира 55 м² в новом монолитном доме у метро Площадь Ленина, евроремонт, парковка\",\n    \"description\": \"QA тест Public API REALT-11413: квартира со всеми описанными полями, полным гео и тремя станциями метро.\"\n  },\n  \"ownerInfo\": {\"owner\": 4, \"ownerType\": 7, \"ownerName\": \"ООО QA Тест\", \"ownerUnp\": 123456789},\n  \"objectParams\": {\n    \"rooms\": 2,\n    \"separateRooms\": 2,\n    \"roomsByPassport\": 2,\n    \"storey\": 6,\n    \"storeys\": 12,\n    \"levels\": 1,\n    \"areaTotal\": 55.5,\n    \"areaLiving\": 30.2,\n    \"areaKitchen\": 10.1,\n    \"areaBalcony\": 3.5,\n    \"areaSnb\": 57,\n    \"ceilingHeight\": 2.8,\n    \"balconiesCount\": 1,\n    \"lavatoriesCount\": 1,\n    \"layout\": 9,\n    \"repairState\": 1,\n    \"facilities\": [607, 622],\n    \"backyardImprovement\": [1, 2, 3, 4],\n    \"facilitiesForDisabledPeople\": [1, 2, 4],\n    \"furniture\": [0],\n    \"view\": [1, 5]\n  },\n  \"buildingInfo\": {\n    \"buildingYear\": 2020,\n    \"houseType\": 11,\n    \"maintenance\": 2,\n    \"isNewBuild\": true,\n    \"notComplete\": false,\n    \"repairYear\": 2023,\n    \"parking\": [9, 10]\n  },\n  \"termsOfSale\": {\"price\": 99000, \"priceCurrency\": 840, \"priceHaggle\": 1, \"terms\": 5, \"termsExtra\": []},\n  \"mlsData\": {\"commissionValue\": 2, \"commissionUnits\": 2, \"purchase\": \"QA условия покупки\", \"comments\": \"QA комментарий для партнёров\"},\n  \"statuses\": {\"web\": [1]}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_as_uuid}}",
+								"description": "Обновление квартиры из «as 13» (uuid из api_as_uuid). photoUrls не передаётся — фото остаются.\n\nЧто меняется относительно as 13: метро — одна станция (Площадь Ленина, 3 мин), этаж 6, санузел совмещённый (1), студия (layout 9), ремонт «отличный» (1), удобства [607, 622], мебель [0], вид [1 улица, 5 водоём], каркасно-блочный (11), ТС (maintenance 2), парковка [9 гараж, 10 открытая], цена 99 000, условия «Подбираются варианты» (5), без аукциона, собственность «долевое» (4), заголовок с «(upd)».\nСмена цены возвращает объявление на модерацию."
+							},
+							"response": []
 						}
 					],
 					"id": "9119f266-3dbe-4d32-9db9-43bebe749bc0"
