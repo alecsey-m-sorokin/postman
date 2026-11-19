@@ -6538,7 +6538,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
-								"description": "Продажа офисов (offs, categoryId 20). Обязательные: category, photoUrls (min 1), contactInfo, locationInfo, objectInfo, ownerInfo, termsOfSale, textData. Нет objectParams/buildingInfo. objectInfo.objectType / objectTypeExtra — коды из shortcuts 20 (офис 17, офис+склад 53, квартира+офис 36, коворкинг 40). terms = 9 (Продажа). Внимание (REALT-12039): цена и площадь у коммерции сейчас не сохраняются; по статье dev для developer разрешена только as. Скрипт сохраняет api_offs_uuid / api_offs_processUuid / api_offs_code."
+								"description": "Продажа офисов (offs, categoryId 20). Обязательные: category, photoUrls (min 1), contactInfo, locationInfo, objectInfo, ownerInfo, termsOfSale, textData. Нет objectParams/buildingInfo.\nobjectInfo.objectType / objectTypeExtra — коды из shortcuts 20 (офис 17, офис+склад 53, квартира+офис 36, коворкинг 40).\nЦена коммерции: termsOfSale.priceMin/priceMax (за всё) и pricePerM2/pricePerM2Max (за м²); условие сделки — term = 9 (не terms). Площадь: objectInfo.areaMin и areaMax (обе обязательны). Поля price, terms, areaTotal у коммерции → 400 additionalProp.\nФото — ссылки с расширением картинки (.jpeg и т.п.).\nСкрипт сохраняет api_offs_uuid / api_offs_processUuid / api_offs_code."
 							},
 							"response": []
 						},
@@ -6585,7 +6585,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/search",
-								"description": "REALT-12039 №5: коммерческие объявления сейчас не попадают в список (totalCount 0)."
+								"description": "Поиск объявления по коду (where.code из api_offs_code). Работают фильтры code, uuids, uuid, category, status, archive. Данные в списке обновляются с задержкой до ~1 мин.\nКоммерция находится (REALT-12039 №5 исправлен 19.11.2026).\nИзвестно: у новых активных объявлений images/imagesV2 = [] при hasImages: true (REALT-12089)."
 							},
 							"response": []
 						},
@@ -6616,7 +6616,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_offs_uuid}}",
-								"description": "REALT-12039 №2: update offs/pls/coms сейчас возвращает 404 «Не существует объявления»."
+								"description": "Обновление офиса без photoUrls — фото не трогаются, processUuid = null. update коммерции работает (REALT-12039 №2 исправлен 19.11.2026)."
 							},
 							"response": []
 						},
@@ -6766,7 +6766,7 @@
 								"method": "GET",
 								"header": [],
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories/20/shortcuts",
-								"description": "Коды для offs: objectType/extraObjectType (офис 17, офис+склад 53, квартира+офис 36, коворкинг 40), repairState, equipment, nds, classes и др."
+								"description": "Коды для offs: objectType/extraObjectType (офис 17, офис+склад 53, квартира+офис 36, коворкинг 40), repairState, equipment, nds, classes и др.\n\nВ теле init/update часть ключей называется иначе: classes → objectInfo.buildingClass, extraObjectType → objectInfo.objectTypeExtra, metroTimeType → locationInfo.nearestMetroStations[].metroTimeType. Ключа seller в теле нет."
 							},
 							"response": []
 						},
@@ -6814,7 +6814,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
-								"description": "Офис (offs, 20): заполнены все поля из GET /advertisements/categories/20/shortcuts.\n\nКоды → значения словаря:\n- townType 1 = город; metroTimeType 1 = Пешком; owner 5 = частная; seller 2 = Хозяин\n- objectType 53 = офис+склад; objectTypeExtra / extraObjectType [53, 17] = офис+склад, офис (в shortcuts ключ extraObjectType, в схеме init — objectTypeExtra)\n- repairState 3 = нормальный; equipment 514 = кондиционер (схема принимает одно число, хотя это мультивыбор); daylight 1 = есть; electricity 4 = 380В; sewer 5 = 2 санузла; phones 3 = 2 телефона; legalAddress 1 = есть; place [301] = в бизнес центре (схема требует массив); classes 101 = A\n- terms 9 = Продажа; nds 1 = НДС включен\n\nПрогон 17.11.2026 (2587876): на карточке и в ЛК есть objectType, objectTypeExtra, repairState, daylight, electricity, sewer, phones, legalAddress, place, nds. equipment хранится (514), но на карточке пусто и в ЛК «Кондиционер» выключен. Теряются без ошибки: classes, owner, seller, metroTimeType, terms. Цена и площадь не сохраняются (баг №4 REALT-12039).\nСкрипт сохраняет api_offs_uuid / api_offs_processUuid / api_offs_code."
+								"description": "Офис (offs, 20): поля из GET /advertisements/categories/20/shortcuts, приведённые к схеме init (19.11.2026).\n\nКоды → значения:\n- townType 1 = город; owner 5 = частная\n- objectType 53 = офис+склад; objectTypeExtra [53, 17] = офис+склад, офис\n- repairState 3 = нормальный; appliance [514] = кондиционер; daylight 1 = есть; electricity 4 = 380В; sewer 5 = 2 санузла; phones 3 = 2 телефона; legalAddress 1 = есть; place [301] = в бизнес-центре; buildingClass [101] = A\n- площадь areaMin = areaMax = 120,5; priceMin 150 000 USD; term 9 = Продажа; nds 1 = НДС включен\n\nПроверено 19.11.2026 (REALT-12059): класс, оснащение, принадлежность, условия сделки сохраняются и видны на карточке.\nСкрипт сохраняет api_offs_uuid / api_offs_processUuid / api_offs_code."
 							},
 							"response": []
 						},
@@ -6857,7 +6857,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_offs_uuid}}",
-								"description": "Обновление офиса из offs 10 (api_offs_uuid). Коды отличаются: objectType 36 = квартира+офис; objectTypeExtra [36, 40] = квартира+офис, коворкинг; repairState 8 = строительная отделка; equipment 703 = охрана; daylight 0 = нет; electricity 3 = 220В; sewer 1 = есть; phones 6 = 5 телефонов; legalAddress 0 = нет; place [305] = в жилом доме; classes 103 = C; owner 1 = государственная; seller 1 = Эксклюзив; nds 2 = НДС не включен; metroTimeType 2 = На транспорте.\n\nПрогон 17.11.2026 (2587876): «Не существует объявления с uuid=…» (404) — update коммерции не работает, баг №2 REALT-12039. После исправления проверить, что все коды применились."
+								"description": "Обновление офиса из offs 10 (api_offs_uuid), без photoUrls. Коды отличаются:\n- objectType 36 = квартира+офис; objectTypeExtra [36, 40] = квартира+офис, коворкинг\n- repairState 8 = строительная отделка; equipment 703 = охрана; daylight 0 = нет; electricity 3 = 220В; sewer 1 = есть; phones 6 = 5 телефонов; legalAddress 0 = нет; place [305] = в жилом доме; buildingClass [103] = C\n- owner 1 = государственная; nds 2 = НДС не включен; площадь 99,9; priceMin 140 000\nupdate коммерции работает (REALT-12039 №2 исправлен)."
 							},
 							"response": []
 						},
@@ -6905,7 +6905,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
-								"description": "Цена коммерции диапазоном. Сайт хранит цену коммерции в полях termsOfSale.priceMin/priceMax (за всё, от–до) и pricePerM2/pricePerM2Max (за м², от–до), площадь — в objectInfo.areaMin/areaMax. Поля price и areaTotal для коммерции не сохраняются (баг №4 REALT-12039).\n\nВарианты (прогон 17.11.2026, все сохраняются и показываются на карточке, цена в USD пересчитывается в BYN):\n- только priceMin → «от 484 050 ƃ»; priceMin+priceMax → «484 050 - 645 400 ƃ»\n- только pricePerM2 → «от 3 872 ƃ/м²»; pricePerM2+pricePerM2Max → «3 872 - 4 841 ƃ/м²»\n- все четыре поля → обе строки; areaMin+areaMax → «Площадь общая 100 - 150 м²», только areaMin → «От 120.50 м²»\n- только priceMax → «до 645 400 ƃ»; без цены / нули / только price → «ДОГОВОРНАЯ ЦЕНА»\n\nБез ошибки принимаются: min > max (на карточке «645 400 - 484 050»), отрицательные (на карточке «от -3 ƃ»), areaMin > areaMax.\nСкрипт сохраняет api_offs_uuid / api_offs_processUuid / api_offs_code."
+								"description": "Цена и площадь коммерции диапазоном: termsOfSale.priceMin/priceMax (за всё, от–до), pricePerM2/pricePerM2Max (за м², от–до); площадь objectInfo.areaMin/areaMax. Все поля описаны в документации (REALT-12056).\n\nОтображение на карточке (цена в USD пересчитывается в BYN):\n- только priceMin → «от …»; priceMin+priceMax → «… - …»\n- pricePerM2(+Max) → «… ƃ/м²»; без цены → «ДОГОВОРНАЯ ЦЕНА»\n\nНе проверяются (REALT-12092): priceMin > priceMax, pricePerM2 > pricePerM2Max, areaMin > areaMax, минус, 0, дробная цена, areaMin без areaMax. Договорная цена (без цены) создаётся, хотя документация требует priceMin или pricePerM2.\nСкрипт сохраняет api_offs_uuid / api_offs_processUuid / api_offs_code."
 							},
 							"response": []
 						},
@@ -6953,7 +6953,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
-								"description": "Офис со всеми полями из документации init (17.11.2026), полным гео из geo/search и тремя станциями метро (metroLineUuid взят из объявления сайта: 1 — 47dd4893…, 3 — 47dd4e82…).\n\nПроверено 17.11 (2587921): создаётся, на карточке все параметры, гео, 3 станции, диапазоны цены и площади. После модерации — «Прошло проверку. Неактивно — не оплачено»; в ЛК и в листинге не видно; в очереди «На модерации» по умолчанию не видно (statusForUser 1). Не сохраняются ownerInfo.owner и hasParking (REALT-12059).\nСкрипт сохраняет api_offs_uuid / api_offs_processUuid / api_offs_code."
+								"description": "Офис со всеми полями из документации init, полным гео из geo/search и тремя станциями метро. metroLineUuid в Public API получить нельзя (REALT-12049) — взят из админки (1 — 47dd4893…, 3 — 47dd4e82…).\n\n19.11.2026: создаётся и сразу активно (status 1, statusForUser 4), есть в ЛК и в листинге /sale/offices/ (REALT-12069). На карточке все параметры, гео, 3 станции, диапазоны цены и площади, класс A, новостройка (buildingState 207), парковка, принадлежность «Частная» (REALT-12059).\nСкрипт сохраняет api_offs_uuid / api_offs_processUuid / api_offs_code."
 							},
 							"response": []
 						},
@@ -6996,7 +6996,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_offs_uuid}}",
-								"description": "Обновление офиса из «offs 13» (api_offs_uuid), без photoUrls.\nМеняется: офис+склад (53) / доп. офис, площадь одна 150 м², цена 260 000 и 1750 за м² без диапазонов, класс B, блочный, ремонт «строительная отделка», в жилом доме, холодная вода, 220В/15 кВт, 5 телефонов, без кондиционера, только отдельный вход и охрана, НДС не включен, «Продажа вместе с фирмой» (12) + «готовый бизнес» (905), одна станция метро, собственность государственная.\n\nПрогон 17.11.2026: update коммерции → 404 «Не существует объявления» (REALT-12039 №2)."
+								"description": "Обновление офиса из «offs 13» (api_offs_uuid), без photoUrls.\nМеняется: офис+склад (53) / доп. офис, площадь одна 150 м², цена 260 000 и 1750 за м² без диапазонов, класс B, блочный, ремонт «строительная отделка», в жилом доме, холодная вода, 220В/15 кВт, 5 телефонов, без кондиционера, только отдельный вход и охрана, НДС не включен, «Продажа вместе с фирмой» (12) + «готовый бизнес» (905), одна станция метро, собственность государственная.\nupdate коммерции работает (REALT-12039 №2 исправлен 19.11.2026)."
 							},
 							"response": []
 						}
@@ -7050,7 +7050,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
-								"description": "Продажа помещений (pls, categoryId 27). Обязательные: category, photoUrls (min 1), contactInfo, locationInfo, objectInfo, ownerInfo, termsOfSale, textData. objectType: здание 16, помещение 21 (shortcuts 27). terms = 9. Внимание (REALT-12039): цена и площадь у коммерции сейчас не сохраняются; update → 404. Скрипт сохраняет api_pls_uuid / api_pls_processUuid / api_pls_code."
+								"description": "Продажа помещений (pls, categoryId 27). Обязательные: category, photoUrls (min 1), contactInfo, locationInfo, objectInfo, ownerInfo, termsOfSale, textData. objectType: здание 16, помещение 21 (shortcuts 27).\nЦена: termsOfSale.priceMin/priceMax, pricePerM2/pricePerM2Max; условие сделки term = 9 (не terms). Площадь: objectInfo.areaMin и areaMax. Поля price, terms, areaTotal → 400 additionalProp.\nФото — ссылки с расширением картинки (.jpeg и т.п.).\nСкрипт сохраняет api_pls_uuid / api_pls_processUuid / api_pls_code."
 							},
 							"response": []
 						},
@@ -7097,7 +7097,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/search",
-								"description": "REALT-12039 №5: коммерческие объявления сейчас не попадают в список."
+								"description": "Поиск объявления по коду (where.code из api_pls_code). Работают фильтры code, uuids, uuid, category, status, archive. Данные обновляются с задержкой до ~1 мин.\nКоммерция находится (REALT-12039 №5 исправлен 19.11.2026). Известно: у новых активных объявлений images/imagesV2 = [] при hasImages: true (REALT-12089)."
 							},
 							"response": []
 						},
@@ -7128,7 +7128,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}",
-								"description": "REALT-12039 №2: update offs/pls/coms сейчас возвращает 404."
+								"description": "Обновление помещения без photoUrls — фото не трогаются, processUuid = null. update коммерции работает (REALT-12039 №2 исправлен 19.11.2026)."
 							},
 							"response": []
 						},
@@ -7278,7 +7278,7 @@
 								"method": "GET",
 								"header": [],
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories/27/shortcuts",
-								"description": "Коды для pls: objectType (здание 16, помещение 21), separateEnter, classes, place, repairState, equipment, nds и др."
+								"description": "Коды для pls: objectType (здание 16, помещение 21), separateEnter, classes, place, repairState, equipment, nds и др.\n\nВ теле init/update: classes → objectInfo.buildingClass, extraObjectType → objectInfo.objectTypeExtra, separateEnter → objectInfo.facilities: [629], metroTimeType → locationInfo.nearestMetroStations[].metroTimeType. Ключа seller в теле нет."
 							},
 							"response": []
 						},
@@ -7326,7 +7326,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
-								"description": "Помещение (pls, 27): заполнены все поля из GET /advertisements/categories/27/shortcuts.\n\nКоды → значения словаря:\n- objectType 21 = помещение; objectTypeExtra / extraObjectType [21, 16] = помещение, здание\n- separateEnter 1 = есть (поле есть только в shortcuts 27)\n- остальные как в offs 10: repairState 3 = нормальный; equipment 514 = кондиционер; daylight 1; electricity 4 = 380В; sewer 5 = 2 санузла; phones 3 = 2 телефона; legalAddress 1; place [301] = в бизнес центре; classes 101 = A; owner 5 = частная; seller 2 = Хозяин; terms 9 = Продажа; nds 1 = НДС включен; townType 1; metroTimeType 1\n\nПрогон 17.11.2026 (2587877): в ЛК хранятся objectType, objectTypeExtra, repairState, equipment, daylight, electricity, sewer, phones, legalAddress, place, nds. Теряются без ошибки: separateEnter, classes, owner, seller, metroTimeType, terms; цена и площадь (баг №4). Карточку категории 27 на сайте открыть не удалось: /sale-offices/, /sale-shops/ и др. отдают 404.\nСкрипт сохраняет api_pls_uuid / api_pls_processUuid / api_pls_code."
+								"description": "Помещение (pls, 27): поля из GET /advertisements/categories/27/shortcuts, приведённые к схеме init (19.11.2026).\n\nКоды → значения:\n- objectType 21 = помещение; objectTypeExtra [21, 16] = помещение, здание\n- facilities [629] = отдельный вход (вместо separateEnter)\n- repairState 3 = нормальный; appliance [514] = кондиционер; daylight 1; electricity 4 = 380В; sewer 5 = 2 санузла; phones 3 = 2 телефона; legalAddress 1; place [301] = в бизнес-центре; buildingClass [101] = A\n- owner 5 = частная; areaMin = areaMax = 120,5; priceMin 150 000; term 9 = Продажа; nds 1 = НДС включен; townType 1\nСкрипт сохраняет api_pls_uuid / api_pls_processUuid / api_pls_code."
 							},
 							"response": []
 						},
@@ -7369,7 +7369,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}",
-								"description": "Обновление помещения из pls 10 (api_pls_uuid). Коды отличаются: objectType 16 = здание; objectTypeExtra [16, 21]; separateEnter 0 = нет; repairState 8; equipment 703 = охрана; daylight 0; electricity 3 = 220В; sewer 1; phones 6 = 5 телефонов; legalAddress 0; place [305] = в жилом доме; classes 103 = C; owner 1 = государственная; seller 1 = Эксклюзив; nds 2; metroTimeType 2.\n\nПрогон 17.11.2026 (2587877): 404 «Не существует объявления с uuid=…» — баг №2 REALT-12039."
+								"description": "Обновление помещения из pls 10 (api_pls_uuid), без photoUrls. Коды отличаются: objectType 16 = здание; objectTypeExtra [16, 21]; без отдельного входа; repairState 8; equipment 703 = охрана; daylight 0; electricity 3 = 220В; sewer 1; phones 6 = 5 телефонов; legalAddress 0; place [305] = в жилом доме; buildingClass [103] = C; owner 1 = государственная; nds 2; площадь 99,9; priceMin 140 000.\nupdate коммерции работает (REALT-12039 №2 исправлен)."
 							},
 							"response": []
 						},
