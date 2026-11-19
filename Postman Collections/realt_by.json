@@ -6076,7 +6076,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
-								"description": "Продажа квартир (as, categoryId 5). Обязательные: category, photoUrls (min 1), buildingInfo, contactInfo, locationInfo, objectParams, ownerInfo, termsOfSale, textData. terms: 1 Чистая продажа, 2–4 обмен. Скрипт сохраняет api_as_uuid / api_as_processUuid / api_as_code."
+								"description": "Продажа квартир (as, categoryId 5). Обязательные: category, photoUrls (min 1), buildingInfo, contactInfo, locationInfo, objectParams, ownerInfo, termsOfSale, textData. terms: 1 Чистая продажа, 2–4 обмен.\n\nКоординаты: positionX — долгота (~27.5), positionY — широта (~53.9); точка вне Беларуси → 400.\nФото: ссылка должна заканчиваться расширением картинки (.jpg/.jpeg/.png/.gif/.webp/.svg), иначе 400 «Ссылка должна вести на изображение». В коллекции — фото Pexels (.jpeg).\nСкрипт сохраняет api_as_uuid / api_as_processUuid / api_as_code."
 							},
 							"response": []
 						},
@@ -6291,7 +6291,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/restore",
-								"description": "Баг REALT-12039 №3: после восстановления объявление становится черновиком (status 6)."
+								"description": "Вернуть объявление из архива (uuid из api_as_uuid).\n\nБаг REALT-12094 п. 1 (19.11.2026): активное объявление после archive → restore получает status 6, statusForUser 9, paymentStatusForUser 0 («Не размещено»), а не возвращается в активный статус. Примеры: 2587999, 2588005."
 							},
 							"response": []
 						},
@@ -6308,7 +6308,7 @@
 								"method": "GET",
 								"header": [],
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories/5/shortcuts",
-								"description": "Коды значений полей для as: toilet, balconyType, repairState, houseType, terms и др."
+								"description": "Коды значений полей для as (toilet, balconyType, repairState, houseType, terms и др.).\n\nЧасть ключей словаря в теле init/update называется иначе (см. документацию): toilet → objectParams.lavatoriesCount, balconyType → objectParams.balconiesCount, parkingPlace → buildingInfo.parking, metroTimeType → locationInfo.nearestMetroStations[].metroTimeType. Ключей phone, storeyType, seller в теле нет."
 							},
 							"response": []
 						},
@@ -6356,7 +6356,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
-								"description": "Квартира (as, 5): заполнены все поля из GET /advertisements/categories/5/shortcuts.\n\nКоды → значения словаря:\n- locationInfo.townType 1 = город; locationInfo.metroTimeType 1 = Пешком\n- ownerInfo.owner 5 = частная; ownerInfo.seller 2 = Хозяин\n- objectParams.repairState 3 = нормальный; furniture [1] = есть (схема требует массив); toilet 1 = Совмещенный; balconyType 2 = Лоджия; phone 1 = есть; storeyType 0 = первый-высокий; parkingPlace 1 = есть\n- buildingInfo.houseType 3 = Монолитный\n- termsOfSale.terms 1 = Чистая продажа\n\nПрогон 17.11.2026 (объявление 2587875): сохраняются repairState, houseType, owner, terms, townType. Теряются без ошибки: toilet, phone, storeyType, seller, metroTimeType (схема их не знает); furniture → 0, parkingPlace → 0, balconyType → 27 (Есть).\nСкрипт сохраняет api_as_uuid / api_as_processUuid / api_as_code — после него работают as 2, 3, 7, 8, 11."
+								"description": "Квартира (as, 5): поля из GET /advertisements/categories/5/shortcuts, приведённые к схеме init (19.11.2026).\n\nКоды → значения:\n- locationInfo.townType 1 = город\n- ownerInfo.owner 5 = частная\n- objectParams.repairState 3 = нормальный; furniture [1] = есть; lavatoriesCount 1 (вместо toilet); balconiesCount 1 (вместо balconyType)\n- buildingInfo.houseType 3 = монолитный; buildingInfo.parking [1] (вместо parkingPlace)\n- termsOfSale.terms 1 = Чистая продажа\n\nКлючи phone, storeyType, seller, metroTimeType убраны: в теле их нет (REALT-12059, исправлено).\nСкрипт сохраняет api_as_uuid / api_as_processUuid / api_as_code — после него работают as 2, 3, 7, 8, 11."
 							},
 							"response": []
 						},
@@ -6399,7 +6399,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_as_uuid}}",
-								"description": "Обновление объявления из as 10 (uuid из api_as_uuid), photoUrls не передаётся — фото остаются. Все коды отличаются от as 10:\n- metroTimeType 2 = На транспорте; owner 4 = долевое строительство; seller 1 = Эксклюзив\n- repairState 8 = строительная отделка; furniture [0] = нет; toilet 2 = 2 и более; balconyType 27 = Есть; phone 3 = 2 телефона; storeyType 2 = технический этаж; parkingPlace 0 = нет\n- houseType 11 = Каркасно-блочный; terms 2 = Обмен\n\nПрогон 17.11.2026 (2587875): применились title, price, repairState, houseType, owner, terms, balconyType (на карточке «балкон»). toilet, phone, storeyType, seller, metroTimeType по-прежнему не сохраняются."
+								"description": "Обновление объявления из as 10 (uuid из api_as_uuid), photoUrls не передаётся — фото остаются. Коды отличаются от as 10:\n- owner 4 = долевое строительство\n- repairState 8 = строительная отделка; furniture [0] = нет\n- houseType 11 = каркасно-блочный; terms 2 = Обмен\n- title с «(upd)», цена 93 000"
 							},
 							"response": []
 						},
@@ -6447,7 +6447,7 @@
 									}
 								},
 								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
-								"description": "Квартира со всеми полями из документации init (17.11.2026) и полным гео.\n\nГео взято из POST /v1/geo/search: город (types [3], townName = shortTitle «Минск»), улица (types [6] + townUuids) — из записи улицы берутся район города и микрорайон. Метро — массив nearestMetroStations; metroLineUuid в geo/search не отдаётся, взят из объявления сайта (1 Московская 47dd4893…, 3 Зеленолужская 47dd4e82…).\n\nОграничения бизнес-валидации: areaSnb ≥ areaTotal и не сильно больше (60 при 55,5 → «Указана слишком большая площадь по СНБ!»).\n\nПроверено 17.11 (2587923): создаётся, после модерации «Активно — размещено», на карточке все поля, гео и 3 станции. В ЛК есть. В листинге /sale/flats/ не появилось.\nСкрипт сохраняет api_as_uuid / api_as_processUuid / api_as_code."
+								"description": "Квартира со всеми полями из документации init и полным гео.\n\nГео взято из POST /v1/geo/search: город (types [3]), улица (types [6] + townUuids) — из записи улицы берутся район города и микрорайон. Метро — массив nearestMetroStations. metroLineUuid в Public API получить нельзя (geo/search его не отдаёт, REALT-12049) — взят из админки, объект 2587867 (1 Московская 47dd4893…, 3 Зеленолужская 47dd4e82…).\n\nОграничения бизнес-валидации: areaSnb ≥ areaTotal и не сильно больше (60 при 55,5 → «Указана слишком большая площадь по СНБ!»).\n\n19.11.2026: создаётся, активно, есть в ЛК и в листинге /sale/flats/ (REALT-12069 исправлен). buildingInfo.isNewBuild: true не сохраняется (REALT-12091).\nСкрипт сохраняет api_as_uuid / api_as_processUuid / api_as_code."
 							},
 							"response": []
 						},
