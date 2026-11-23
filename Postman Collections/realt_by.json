@@ -6398,7 +6398,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_as_uuid}}",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_as_uuid}}",
 								"description": "Обновление объявления из as 10 (uuid из api_as_uuid), photoUrls не передаётся — фото остаются. Коды отличаются от as 10:\n- owner 4 = долевое строительство\n- repairState 8 = строительная отделка; furniture [0] = нет\n- houseType 11 = каркасно-блочный; terms 2 = Обмен\n- title с «(upd)», цена 93 000"
 							},
 							"response": []
@@ -6446,7 +6446,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/init",
 								"description": "Квартира со всеми полями из документации init и полным гео.\n\nГео взято из POST /v1/geo/search: город (types [3]), улица (types [6] + townUuids) — из записи улицы берутся район города и микрорайон. Метро — массив nearestMetroStations. metroLineUuid в Public API получить нельзя (geo/search его не отдаёт, REALT-12049) — взят из админки, объект 2587867 (1 Московская 47dd4893…, 3 Зеленолужская 47dd4e82…).\n\nОграничения бизнес-валидации: areaSnb ≥ areaTotal и не сильно больше (60 при 55,5 → «Указана слишком большая площадь по СНБ!»).\n\n19.11.2026: создаётся, активно, есть в ЛК и в листинге /sale/flats/ (REALT-12069 исправлен). buildingInfo.isNewBuild: true не сохраняется (REALT-12091).\nСкрипт сохраняет api_as_uuid / api_as_processUuid / api_as_code."
 							},
 							"response": []
