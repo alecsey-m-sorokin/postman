@@ -6075,7 +6075,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/init",
 								"description": "Продажа квартир (as, categoryId 5). Обязательные: category, photoUrls (min 1), buildingInfo, contactInfo, locationInfo, objectParams, ownerInfo, termsOfSale, textData. terms: 1 Чистая продажа, 2–4 обмен.\n\nКоординаты: positionX — долгота (~27.5), positionY — широта (~53.9); точка вне Беларуси → 400.\nФото: ссылка должна заканчиваться расширением картинки (.jpg/.jpeg/.png/.gif/.webp/.svg), иначе 400 «Ссылка должна вести на изображение». В коллекции — фото Pexels (.jpeg).\nСкрипт сохраняет api_as_uuid / api_as_processUuid / api_as_code."
 							},
 							"response": []
@@ -6092,7 +6092,7 @@
 								},
 								"method": "GET",
 								"header": [],
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/operations/{{api_as_processUuid}}",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/operations/{{api_as_processUuid}}",
 								"description": "photoStatus pending/done/failed, objectStatus, failedUrls — для последней операции с фото (создание или обновление с фото)."
 							},
 							"response": []
@@ -6123,7 +6123,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/search",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/search",
 								"description": "Метода просмотра одного объявления нет — используем список с фильтром по code (работают фильтры code, uuids, archive). Данные в списке обновляются с задержкой ~30–40 с."
 							},
 							"response": []
@@ -6154,7 +6154,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_as_uuid}}",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_as_uuid}}",
 								"description": "Без ключа photoUrls — фото не трогаются, синхронный update (processUuid = null). Ключевые поля (цена/валюта, title/headline/description) → повторная модерация; остальные — статус не меняется. Только для update as: buildingInfo.buildingCompletionPercentage (0–100), objectParams.loggiasCount (0–27)."
 							},
 							"response": []
@@ -6198,7 +6198,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_as_uuid}}",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_as_uuid}}",
 								"description": "Непустой photoUrls — асинхронная загрузка (processUuid), старые фото заменяются новыми. Пока операция идёт, повторный update → 409. Скрипт обновляет api_as_processUuid."
 							},
 							"response": []
@@ -6229,7 +6229,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_as_uuid}}",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_as_uuid}}",
 								"description": "photoUrls: [] — снимает все фото объявления. По архитектуре на модерацию из-за этого не отправляет."
 							},
 							"response": []
@@ -6260,7 +6260,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/archive"
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/archive"
 							},
 							"response": []
 						},
@@ -8566,11 +8566,13 @@
 		},
 		{
 			"key": "api_stage",
-			"value": "https://dev.realt.by"
+			"value": "https://dev.realt.by",
+			"disabled": true
 		},
 		{
 			"key": "api_stage",
-			"value": ""
+			"value": "https://dev2.realt.by",
+			"disabled": true
 		}
 	]
 }
