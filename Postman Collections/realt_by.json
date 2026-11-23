@@ -6290,7 +6290,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/restore",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/restore",
 								"description": "Вернуть объявление из архива (uuid из api_as_uuid).\n\nБаг REALT-12094 п. 1 (19.11.2026): активное объявление после archive → restore получает status 6, statusForUser 9, paymentStatusForUser 0 («Не размещено»), а не возвращается в активный статус. Примеры: 2587999, 2588005."
 							},
 							"response": []
@@ -6307,7 +6307,7 @@
 								},
 								"method": "GET",
 								"header": [],
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories/5/shortcuts",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/categories/5/shortcuts",
 								"description": "Коды значений полей для as (toilet, balconyType, repairState, houseType, terms и др.).\n\nЧасть ключей словаря в теле init/update называется иначе (см. документацию): toilet → objectParams.lavatoriesCount, balconyType → objectParams.balconiesCount, parkingPlace → buildingInfo.parking, metroTimeType → locationInfo.nearestMetroStations[].metroTimeType. Ключей phone, storeyType, seller в теле нет."
 							},
 							"response": []
@@ -6355,7 +6355,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/init",
 								"description": "Квартира (as, 5): поля из GET /advertisements/categories/5/shortcuts, приведённые к схеме init (19.11.2026).\n\nКоды → значения:\n- locationInfo.townType 1 = город\n- ownerInfo.owner 5 = частная\n- objectParams.repairState 3 = нормальный; furniture [1] = есть; lavatoriesCount 1 (вместо toilet); balconiesCount 1 (вместо balconyType)\n- buildingInfo.houseType 3 = монолитный; buildingInfo.parking [1] (вместо parkingPlace)\n- termsOfSale.terms 1 = Чистая продажа\n\nКлючи phone, storeyType, seller, metroTimeType убраны: в теле их нет (REALT-12059, исправлено).\nСкрипт сохраняет api_as_uuid / api_as_processUuid / api_as_code — после него работают as 2, 3, 7, 8, 11."
 							},
 							"response": []
