@@ -7049,7 +7049,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/init",
 								"description": "Продажа помещений (pls, categoryId 27). Обязательные: category, photoUrls (min 1), contactInfo, locationInfo, objectInfo, ownerInfo, termsOfSale, textData. objectType: здание 16, помещение 21 (shortcuts 27).\nЦена: termsOfSale.priceMin/priceMax, pricePerM2/pricePerM2Max; условие сделки term = 9 (не terms). Площадь: objectInfo.areaMin и areaMax. Поля price, terms, areaTotal → 400 additionalProp.\nФото — ссылки с расширением картинки (.jpeg и т.п.).\nСкрипт сохраняет api_pls_uuid / api_pls_processUuid / api_pls_code."
 							},
 							"response": []
@@ -7066,7 +7066,7 @@
 								},
 								"method": "GET",
 								"header": [],
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/operations/{{api_pls_processUuid}}"
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/operations/{{api_pls_processUuid}}"
 							},
 							"response": []
 						},
@@ -7096,7 +7096,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/search",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/search",
 								"description": "Поиск объявления по коду (where.code из api_pls_code). Работают фильтры code, uuids, uuid, category, status, archive. Данные обновляются с задержкой до ~1 мин.\nКоммерция находится (REALT-12039 №5 исправлен 19.11.2026). Известно: у новых активных объявлений images/imagesV2 = [] при hasImages: true (REALT-12089)."
 							},
 							"response": []
@@ -7127,7 +7127,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}",
 								"description": "Обновление помещения без photoUrls — фото не трогаются, processUuid = null. update коммерции работает (REALT-12039 №2 исправлен 19.11.2026)."
 							},
 							"response": []
@@ -7171,7 +7171,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}"
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}"
 							},
 							"response": []
 						},
@@ -7201,7 +7201,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}"
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}"
 							},
 							"response": []
 						},
@@ -7231,7 +7231,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/archive"
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/archive"
 							},
 							"response": []
 						},
@@ -7261,7 +7261,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/restore"
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/restore"
 							},
 							"response": []
 						},
@@ -7277,7 +7277,7 @@
 								},
 								"method": "GET",
 								"header": [],
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories/27/shortcuts",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/categories/27/shortcuts",
 								"description": "Коды для pls: objectType (здание 16, помещение 21), separateEnter, classes, place, repairState, equipment, nds и др.\n\nВ теле init/update: classes → objectInfo.buildingClass, extraObjectType → objectInfo.objectTypeExtra, separateEnter → objectInfo.facilities: [629], metroTimeType → locationInfo.nearestMetroStations[].metroTimeType. Ключа seller в теле нет."
 							},
 							"response": []
@@ -7325,7 +7325,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/init",
 								"description": "Помещение (pls, 27): поля из GET /advertisements/categories/27/shortcuts, приведённые к схеме init (19.11.2026).\n\nКоды → значения:\n- objectType 21 = помещение; objectTypeExtra [21, 16] = помещение, здание\n- facilities [629] = отдельный вход (вместо separateEnter)\n- repairState 3 = нормальный; appliance [514] = кондиционер; daylight 1; electricity 4 = 380В; sewer 5 = 2 санузла; phones 3 = 2 телефона; legalAddress 1; place [301] = в бизнес-центре; buildingClass [101] = A\n- owner 5 = частная; areaMin = areaMax = 120,5; priceMin 150 000; term 9 = Продажа; nds 1 = НДС включен; townType 1\nСкрипт сохраняет api_pls_uuid / api_pls_processUuid / api_pls_code."
 							},
 							"response": []
@@ -7368,7 +7368,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}",
 								"description": "Обновление помещения из pls 10 (api_pls_uuid), без photoUrls. Коды отличаются: objectType 16 = здание; objectTypeExtra [16, 21]; без отдельного входа; repairState 8; equipment 703 = охрана; daylight 0; electricity 3 = 220В; sewer 1; phones 6 = 5 телефонов; legalAddress 0; place [305] = в жилом доме; buildingClass [103] = C; owner 1 = государственная; nds 2; площадь 99,9; priceMin 140 000.\nupdate коммерции работает (REALT-12039 №2 исправлен)."
 							},
 							"response": []
@@ -7416,7 +7416,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/init",
 								"description": "Цена помещения диапазоном: priceMin/priceMax (за всё), pricePerM2/pricePerM2Max (за м²), площадь areaMin/areaMax. Подробности — в offs 12.\nПроверки диапазонов и значений пока нет (REALT-12092).\nСкрипт сохраняет api_pls_uuid / api_pls_processUuid / api_pls_code."
 							},
 							"response": []
@@ -7464,7 +7464,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/init",
 								"description": "Помещение (pls): помещение (21), доп. тип «здание» (16). Остальное как в offs 13: полное гео из geo/search, 3 станции метро (metroLineUuid взят из админки, REALT-12049), все поля objectInfo и termsOfSale из документации.\nОжидаемо как у офиса (19.11.2026): сразу активно, есть в ЛК и в листинге. Форма в ЛК: /account/my-objects/edit/27/{{api_pls_code}}/.\nСкрипт сохраняет api_pls_uuid / api_pls_processUuid / api_pls_code."
 							},
 							"response": []
@@ -7507,7 +7507,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_pls_uuid}}",
 								"description": "Обновление помещения из «pls 13» (api_pls_uuid), без photoUrls. Меняется: здание (16) / доп. помещение, остальное как в offs 14 (площадь 150, цена 260 000 / 1750 за м², класс B, блочный, «Продажа вместе с фирмой», одна станция метро и т.д.).\nupdate коммерции работает (REALT-12039 №2 исправлен 19.11.2026)."
 							},
 							"response": []
@@ -7561,7 +7561,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/init",
 								"description": "Продажа коммерческой недвижимости (coms, categoryId 18). Обязательные: category, photoUrls (min 1), contactInfo, locationInfo, objectInfo, ownerInfo, termsOfSale, textData. objectType (shortcuts 18): магазин 27, павильон 22, торговое место 31, торговый центр 33, торговое помещение 15, киоск 47, аптека 18, бутик 46, стрит ритэйл 34.\nЦена: termsOfSale.priceMin/priceMax, pricePerM2/pricePerM2Max; условие сделки term = 9 (не terms). Площадь: objectInfo.areaMin и areaMax. Поля price, terms, areaTotal → 400 additionalProp.\nФото — ссылки с расширением картинки (.jpeg и т.п.). Карточка: /sale-shops/object/{{api_coms_code}}/.\nСкрипт сохраняет api_coms_uuid / api_coms_processUuid / api_coms_code."
 							},
 							"response": []
@@ -7578,7 +7578,7 @@
 								},
 								"method": "GET",
 								"header": [],
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/operations/{{api_coms_processUuid}}"
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/operations/{{api_coms_processUuid}}"
 							},
 							"response": []
 						},
@@ -7608,7 +7608,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/search",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/search",
 								"description": "Поиск объявления по коду (where.code из api_coms_code). Работают фильтры code, uuids, uuid, category, status, archive. Данные обновляются с задержкой до ~1 мин.\nКоммерция находится (REALT-12039 №5 исправлен 19.11.2026). Известно: у новых активных объявлений images/imagesV2 = [] при hasImages: true (REALT-12089)."
 							},
 							"response": []
@@ -7639,7 +7639,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_coms_uuid}}",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_coms_uuid}}",
 								"description": "Обновление торговой недвижимости без photoUrls — фото не трогаются, processUuid = null. update коммерции работает (REALT-12039 №2 исправлен 19.11.2026)."
 							},
 							"response": []
@@ -7683,7 +7683,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_coms_uuid}}"
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_coms_uuid}}"
 							},
 							"response": []
 						},
@@ -7713,7 +7713,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_coms_uuid}}"
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_coms_uuid}}"
 							},
 							"response": []
 						},
@@ -7743,7 +7743,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/archive"
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/archive"
 							},
 							"response": []
 						},
@@ -7773,7 +7773,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/restore"
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/restore"
 							},
 							"response": []
 						},
@@ -7789,7 +7789,7 @@
 								},
 								"method": "GET",
 								"header": [],
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories/18/shortcuts",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/categories/18/shortcuts",
 								"description": "Коды для coms: objectType (магазин 27, павильон 22, торговое место 31, торговый центр 33, торговое помещение 15, киоск 47, аптека 18, бутик 46, стрит ритэйл 34), repairState, equipment, nds, classes и др.\n\nВ теле init/update: classes → objectInfo.buildingClass, extraObjectType → objectInfo.objectTypeExtra, metroTimeType → locationInfo.nearestMetroStations[].metroTimeType. Ключа seller в теле нет."
 							},
 							"response": []
@@ -7837,7 +7837,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/init",
 								"description": "Торговая недвижимость (coms, 18): поля из GET /advertisements/categories/18/shortcuts, приведённые к схеме init (19.11.2026).\n\nКоды → значения:\n- objectType 27 = магазин; objectTypeExtra [27, 46, 34] = магазин, бутик, стрит ритэйл\n- repairState 3 = нормальный; appliance [514] = кондиционер; daylight 1; electricity 4 = 380В; sewer 5 = 2 санузла; phones 3 = 2 телефона; legalAddress 1; place [301] = в бизнес-центре; buildingClass [101] = A\n- owner 5 = частная; areaMin = areaMax = 120,5; priceMin 150 000; term 9 = Продажа; nds 1 = НДС включен; townType 1\nСкрипт сохраняет api_coms_uuid / api_coms_processUuid / api_coms_code."
 							},
 							"response": []
