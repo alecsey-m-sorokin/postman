@@ -7880,7 +7880,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_coms_uuid}}",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_coms_uuid}}",
 								"description": "Обновление торговой недвижимости из coms 10 (api_coms_uuid), без photoUrls. Коды отличаются: objectType 15 = торговое помещение; objectTypeExtra [15, 18] = торговое помещение, аптека; repairState 8; equipment 703 = охрана; daylight 0; electricity 3 = 220В; sewer 1; phones 6 = 5 телефонов; legalAddress 0; place [305] = в жилом доме; buildingClass [103] = C; owner 1 = государственная; nds 2; площадь 99,9; priceMin 140 000.\nupdate коммерции работает (REALT-12039 №2 исправлен)."
 							},
 							"response": []
@@ -7928,7 +7928,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/init",
 								"description": "Цена торговой недвижимости диапазоном: priceMin/priceMax (за всё), pricePerM2/pricePerM2Max (за м²), площадь areaMin/areaMax. Подробности — в offs 12. Карточка: /sale-shops/object/{{api_coms_code}}/.\nПроверки диапазонов и значений пока нет (REALT-12092).\nСкрипт сохраняет api_coms_uuid / api_coms_processUuid / api_coms_code."
 							},
 							"response": []
@@ -7976,7 +7976,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/init",
 								"description": "Торговая недвижимость (coms): магазин (27), доп. типы бутик (46) и стрит ритэйл (34), 1-й этаж. Остальное как в offs 13: полное гео из geo/search, 3 станции метро (metroLineUuid взят из админки, REALT-12049), все поля objectInfo и termsOfSale из документации.\nКарточка: /sale-shops/object/{{api_coms_code}}/. Ожидаемо как у офиса (19.11.2026): сразу активно, есть в ЛК и в листинге.\nСкрипт сохраняет api_coms_uuid / api_coms_processUuid / api_coms_code."
 							},
 							"response": []
@@ -8019,7 +8019,7 @@
 										}
 									}
 								},
-								"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_coms_uuid}}",
+								"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_coms_uuid}}",
 								"description": "Обновление торговой недвижимости из «coms 13» (api_coms_uuid), без photoUrls. Меняется: торговое помещение (15) / доп. магазин (27), остальное как в offs 14 (площадь 150, цена 260 000 / 1750 за м², класс B, «Продажа вместе с фирмой», одна станция метро и т.д.).\nupdate коммерции работает (REALT-12039 №2 исправлен 19.11.2026)."
 							},
 							"response": []
@@ -8066,7 +8066,7 @@
 								}
 							}
 						},
-						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/auth/login",
+						"url": "{{api_stage}}/bff/proxy/api/public/v1/auth/login",
 						"description": "Документация: https://dev3.realt.by/bff/proxy/api/public/docs\nВозвращает accessToken (15 мин) и refreshToken (30 дней). Тест-скрипт сохраняет их в переменные коллекции api_token / api_refreshToken."
 					},
 					"response": []
@@ -8110,7 +8110,7 @@
 								}
 							}
 						},
-						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/auth/refresh",
+						"url": "{{api_stage}}/bff/proxy/api/public/v1/auth/refresh",
 						"description": "Ротация пары токенов. Предыдущие токены перестают действовать."
 					},
 					"response": []
@@ -8127,7 +8127,7 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/auth/logout",
+						"url": "{{api_stage}}/bff/proxy/api/public/v1/auth/logout",
 						"description": "Завершает сессию. Токены перестают действовать."
 					},
 					"response": []
@@ -8175,7 +8175,7 @@
 								}
 							}
 						},
-						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/init",
+						"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/init",
 						"description": "Создаёт объявление (category: as / offs / pls / coms). Фото грузятся асинхронно, статус — по processUuid. Тест-скрипт сохраняет api_uuid, api_processUuid, api_code.\nФото: ссылка должна заканчиваться расширением картинки (.jpg/.jpeg/.png/.gif/.webp/.svg), иначе 400 «Ссылка должна вести на изображение». Координаты: positionX — долгота, positionY — широта."
 					},
 					"response": []
@@ -8219,7 +8219,7 @@
 								}
 							}
 						},
-						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/update/{{api_uuid}}",
+						"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/update/{{api_uuid}}",
 						"description": "Без photoUrls — фото не трогаются; photoUrls: [] — фото снимаются; непустой photoUrls — новая загрузка (вернётся processUuid). Пока идёт другая операция — 409."
 					},
 					"response": []
@@ -8236,7 +8236,7 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/operations/{{api_processUuid}}",
+						"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/operations/{{api_processUuid}}",
 						"description": "processUuid из ответа создания/обновления. Возвращает objectStatus, photoStatus (pending/done/failed), failedUrls."
 					},
 					"response": []
@@ -8267,7 +8267,7 @@
 								}
 							}
 						},
-						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/archive"
+						"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/archive"
 					},
 					"response": []
 				},
@@ -8297,7 +8297,7 @@
 								}
 							}
 						},
-						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/restore"
+						"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/restore"
 					},
 					"response": []
 				},
@@ -8327,7 +8327,7 @@
 								}
 							}
 						},
-						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/search"
+						"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/search"
 					},
 					"response": []
 				},
@@ -8343,7 +8343,7 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories",
+						"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/categories",
 						"description": "Категории, открытые в API: as(5), offs(20), pls(27), coms(18)."
 					},
 					"response": []
@@ -8360,7 +8360,7 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories",
+						"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/categories",
 						"description": "Категории, открытые в API: as(5), offs(20), pls(27), coms(18)."
 					},
 					"response": []
@@ -8377,7 +8377,7 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/advertisements/categories/5/shortcuts",
+						"url": "{{api_stage}}/bff/proxy/api/public/v1/advertisements/categories/5/shortcuts",
 						"description": "Допустимые значения полей (название → код) для categoryId: 5 as, 20 offs, 27 pls, 18 coms."
 					},
 					"response": []
@@ -8408,7 +8408,7 @@
 								}
 							}
 						},
-						"url": "https://dev3.realt.by/bff/proxy/api/public/v1/geo/search",
+						"url": "{{api_stage}}/bff/proxy/api/public/v1/geo/search",
 						"description": "type: 1 регион, 2 район обл., 3 город, 4 район города, 5 микрорайон, 6 улица, 7 метро. Найденные uuid передаются в locationInfo."
 					},
 					"response": []
