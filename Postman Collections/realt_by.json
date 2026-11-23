@@ -8562,12 +8562,12 @@
 		},
 		{
 			"key": "api_stage",
-			"value": "https://dev3.realt.by"
+			"value": "https://dev3.realt.by",
+			"disabled": true
 		},
 		{
 			"key": "api_stage",
-			"value": "https://dev.realt.by",
-			"disabled": true
+			"value": "https://dev.realt.by"
 		},
 		{
 			"key": "api_stage",
